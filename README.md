@@ -27,6 +27,6 @@ Not yet released. Still in under development.
 
 [Click here to add you comments and feedback][CONTACT]
 
-[LOGO]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/flutter_redux_gen_logo.svg
+[LOGO]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/flutter_redux_gen_logo_with_name.png
 [AUTHOR]: https://balamurugan.dev/
 [CONTACT]: https://forms.gle/wXPgEEAYvczjWwys8
