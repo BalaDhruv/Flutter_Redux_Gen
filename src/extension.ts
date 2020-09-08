@@ -10,6 +10,8 @@ const MIDDLEWARE_EXTENSION = '.state.dart';
 const ACTION_EXTENSION = '.state.dart';
 const DEFAULT_NAME = 'default';
 const CREATE_STATE_PLACE_HOLDER = 'Enter State Name';
+const NAME_ERROR_MESSAGE = 'Please use name without space. Consider using "_"';
+const NAME_REG_EXP = new RegExp(/[`0-9 ~!@#$%^&*()|+\-=?;:'",.<>\{\}\[\]\\\/]/);
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -28,11 +30,19 @@ export function activate(context: vscode.ExtensionContext) {
 		let focusedFilePath = getFilePath(args.path);
 		let nameField = vscode.window.createInputBox();
 		nameField.placeholder = CREATE_STATE_PLACE_HOLDER;
+		nameField.onDidChangeValue((v) => {
+			console.log(NAME_REG_EXP.test(v));
+			nameField.validationMessage = NAME_REG_EXP.test(v)? NAME_ERROR_MESSAGE : '';
+		});
 		nameField.onDidAccept(() => {
-			console.log(nameField.value);
-			nameField.hide();
-			var name = nameField.value ? nameField.value : DEFAULT_NAME;
-			createFile(focusedFilePath, name, STATE_EXTENSION);
+			if (nameField.value.includes(' ')) {
+				nameField.validationMessage = NAME_ERROR_MESSAGE;
+			} else {
+				nameField.hide();
+				var name = nameField.value ? nameField.value : DEFAULT_NAME;
+				createFile(focusedFilePath, name, STATE_EXTENSION);
+				nameField.validationMessage = '';
+			}
 		});
 		nameField.show();
 	});
@@ -47,35 +57,45 @@ function getFilePath(path: string) {
 function createFile(fPath: string, name: string, extention: string) {
 	const pathWithFileName = fPath + '/' + name.toLocaleLowerCase() + extention;
 	fs.writeFile(pathWithFileName, getStateGenCode(name), err => {
-		console.log(err);
+		vscode.window.showInformationMessage('Please check your path. Otherwise file a issue in Git Repo. Let me help.');
 	});
-	vscode.window.showInformationMessage(pathWithFileName.toString());
+	vscode.window.showInformationMessage('State Created Successfully.');
 }
 
 function getStateGenCode(stateName: string) {
+	const sName = formattedName(stateName);
 	return `
-	class ${stateName}State {
-	  
-		${stateName}State();
-	  
-		factory ${stateName}State.initial() => ${stateName}State();
-	  
-		@override
-		bool operator ==(other) =>
-			identical(this, other) ||
-			other is ${stateName}State &&
-				runtimeType == other.runtimeType;
-	  
-		@override
-		int get hashCode =>
-			super.hashCode;
-	  
-		@override
-		String toString() {
-		  return "${stateName}State {  }";
-		}
-	}
+class ${sName}State {
+	final bool loading;
+	final String error;
+
+	${sName}State(this.loading, this.error);
+
+	factory ${sName}State.initial() => ${sName}State(false, '');
+
+	${sName}State copyWith({bool loading, String error}) =>
+		${sName}State(loading ?? this.loading, error ?? this.error);
+
+	@override
+	bool operator ==(other) =>
+		identical(this, other) ||
+		other is ${sName}State &&
+			runtimeType == other.runtimeType &&
+			loading == other.loading &&
+			error == other.error;
+
+	@override
+	int get hashCode =>
+		super.hashCode ^ runtimeType.hashCode ^ loading.hashCode ^ error.hashCode;
+
+	@override
+	String toString() => "${sName}State { loading: $loading,  error: $error}";
+}
 	  `;
+}
+
+function formattedName(name:string) {
+	return  name.split('_').map(word=>word[0].toLocaleUpperCase()+word.substring(1)).join('');
 }
 
 // this method is called when your extension is deactivated
