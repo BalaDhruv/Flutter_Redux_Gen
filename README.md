@@ -23,5 +23,10 @@ I am Lazy Freelance Flutter Developer who doesn't wanna create redux files repea
 
 Not yet released. Still in under development.
 
+## Contact
+
+[Click here to add you comments and feedback][CONTACT]
+
 [LOGO]: ./media/flutter_redux_gen_logo.svg
 [AUTHOR]: https://balamurugan.dev/
+[CONTACT]: https://forms.gle/wXPgEEAYvczjWwys8
