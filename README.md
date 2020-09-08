@@ -17,12 +17,6 @@ I am Lazy Freelance Flutter Developer who doesn't wanna create redux files repea
 3. Create Action
 4. Create Redux Set (creates folder with state,reducer,middleware and action file)
 
-## Release Notes
-
-### 0.0.1
-
-Not yet released. Still in under development.
-
 ## Contact
 
 [Click here to add you comments and feedback][CONTACT]
