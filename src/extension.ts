@@ -35,9 +35,6 @@ export function activate(context: vscode.ExtensionContext) {
 			createFile(focusedFilePath, name, STATE_EXTENSION);
 		});
 		nameField.show();
-
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from flutter-redux-gen!');
 	});
 
 	context.subscriptions.push(createState);
@@ -48,7 +45,6 @@ function getFilePath(path: string) {
 }
 
 function createFile(fPath: string, name: string, extention: string) {
-	console.log("INSIDE CREATE FILE");
 	const pathWithFileName = fPath + '/' + name.toLocaleLowerCase() + extention;
 	fs.writeFile(pathWithFileName, getStateGenCode(name), err => {
 		console.log(err);
