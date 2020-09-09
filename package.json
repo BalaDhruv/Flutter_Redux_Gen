@@ -2,7 +2,7 @@
 	"name": "flutter-redux-gen",
 	"displayName": "Flutter Redux Gen",
 	"description": "This is the VS Code Extension to generate Redux Code (State, Reducer, Middleware and Action).",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"publisher": "BalaDhruv",
 	"author": {
 		"name": "Balamurugan",
@@ -33,7 +33,8 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:flutter-redux-gen.createState"
+		"onCommand:flutter-redux-gen.createState",
+		"onCommand:flutter-redux-gen.createReducer"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -42,13 +43,32 @@
 				"command": "flutter-redux-gen.createState",
 				"title": "Create State",
 				"category": "Flutter Redux Gen"
+			},
+			{
+				"command": "flutter-redux-gen.createReducer",
+				"title": "Create Reducer",
+				"category": "Flutter Redux Gen"
 			}
 		],
 		"menus": {
+			"commandPalette": [
+				{
+					"command": "flutter-redux-gen.createState",
+					"when": "false"
+				},
+				{
+					"command": "flutter-redux-gen.createReducer",
+					"when": "false"
+				}
+			],
 			"explorer/context": [
 				{
                     "command": "flutter-redux-gen.createState",
                     "group": "navigation@3"
+				},
+				{
+                    "command": "flutter-redux-gen.createReducer",
+                    "group": "navigation@4"
                 }
 			]
 		}

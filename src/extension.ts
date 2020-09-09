@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
-import { CREATE_STATE_PLACE_HOLDER, NAME_ERROR_MESSAGE, NAME_REG_EXP, DEFAULT_NAME, STATE_EXTENSION } from './resources/constants';
+import { CREATE_STATE_PLACE_HOLDER, NAME_ERROR_MESSAGE,CREATE_REDUCER_PLACE_HOLDER, NAME_REG_EXP, DEFAULT_NAME, STATE_EXTENSION, REDUCER_EXTENSION } from './resources/constants';
+import { getFormattedReducerName, getFormattedStateName, getFilePath } from './resources/utils';
 
 
 // this method is called when your extension is activated
@@ -23,7 +24,7 @@ export function activate(context: vscode.ExtensionContext) {
 			} else {
 				nameField.hide();
 				var name = nameField.value ? nameField.value : DEFAULT_NAME;
-				createFile(focusedFilePath, name, STATE_EXTENSION);
+				createFile(focusedFilePath, name, STATE_EXTENSION,getStateGenCode);
 				nameField.validationMessage = '';
 			}
 		});
@@ -38,7 +39,7 @@ export function activate(context: vscode.ExtensionContext) {
 		let focusedFilePath = getFilePath(args.path);
 		let nameField = vscode.window.createInputBox();
 		let nameFieldValidator = new RegExp(NAME_REG_EXP);
-		nameField.placeholder = CREATE_STATE_PLACE_HOLDER;
+		nameField.placeholder = CREATE_REDUCER_PLACE_HOLDER;
 		nameField.onDidChangeValue((v) => {
 			nameField.validationMessage = nameFieldValidator.test(v)? NAME_ERROR_MESSAGE : '';
 		});
@@ -48,28 +49,24 @@ export function activate(context: vscode.ExtensionContext) {
 			} else {
 				nameField.hide();
 				var name = nameField.value ? nameField.value : DEFAULT_NAME;
-				createFile(focusedFilePath, name, STATE_EXTENSION);
+				createFile(focusedFilePath, name, REDUCER_EXTENSION,getReducerGenCode);
 				nameField.validationMessage = '';
 			}
 		});
 		nameField.show();
 	});
 
-	context.subscriptions.push(createState);
+	context.subscriptions.push(createReducer);
 }
 
-function getFilePath(path: string) {
-	return path.split('/').filter((path: any) => !path.includes('.')).join('/');
-}
-
-function createFile(fPath: string, name: string, extention: string) {
+function createFile(fPath: string, name: string, extention: string,getGenCode:Function) {
 	const pathWithFileName = fPath + '/' + name.toLocaleLowerCase() + extention;
-	fs.writeFile(pathWithFileName, getStateGenCode(name), err => {
+	fs.writeFile(pathWithFileName, getGenCode(name), err => {
 		console.log(err);
 		if(err){
 			vscode.window.showInformationMessage('Please check your path. Otherwise file a issue in Git Repo. Let me help.');
 		}else{
-			vscode.window.showInformationMessage('State Created Successfully.');
+			vscode.window.showInformationMessage(`${name}${extention} Created Successfully.`);
 		}
 	});
 }
@@ -106,9 +103,16 @@ class ${sName}State {
 	  `;
 }
 
-function getFormattedStateName(name:string) {
-	return  name.split('_').map(word=>word[0].toLocaleUpperCase()+word.substring(1)).join('');
+function getReducerGenCode(name:string){
+	const sName = getFormattedReducerName(name);
+	return `
+import 'package:redux/redux.dart';
+
+final ${sName}Reducer = combineReducers<AppState>([
+]);
+	`;
 }
+
 
 // this method is called when your extension is deactivated
 export function deactivate() { }
