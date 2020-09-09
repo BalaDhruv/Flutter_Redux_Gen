@@ -40,7 +40,7 @@
 		"commands": [
 			{
 				"command": "flutter-redux-gen.createState",
-				"title": "Create App State",
+				"title": "Create State",
 				"category": "Flutter Redux Gen"
 			}
 		],
