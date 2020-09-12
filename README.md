@@ -1,5 +1,7 @@
 [![LOGO][]][AUTHOR]
 
+[![Discord Chat](https://img.shields.io/badge/chat-discord-blue.svg)](https://discord.gg/KYPkhEx)
+
 ## Introduction 
 
 This is the VS Code Extension to generate Redux Code (State, Reducer, Middleware and Action).
