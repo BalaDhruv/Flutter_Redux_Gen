@@ -6,9 +6,11 @@ This is the VS Code Extension to generate Redux Code (State, Reducer, Middleware
 
 I am Lazy Freelance Flutter Developer who doesn't wanna create redux files repeatedly. That's why I am building this extension to solve this problem.
 
+Yadda yadda<a href="#note1" id="note1ref"><sup>1</sup></a>
+
 ## Features
 
-1. Create State
+1. Create State 
 2. Create Reducer
 
 ## How to Use
@@ -24,6 +26,8 @@ I am Lazy Freelance Flutter Developer who doesn't wanna create redux files repea
 ## Contact
 
 [Click here to add you comments and feedback][CONTACT]
+
+<a id="note1" href="#note1ref"><sup>1</sup></a>Here is the footnote text.
 
 [LOGO]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/flutter_redux_gen_logo_with_name.png
 [AUTHOR]: https://balamurugan.dev/
