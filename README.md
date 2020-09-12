@@ -8,7 +8,7 @@ I am Lazy Freelance Flutter Developer who doesn't wanna create redux files repea
 
 ## Features
 
-1. Create State
+1. Create State 
 2. Create Reducer
 3. Create Middleware
 4. Create Action
