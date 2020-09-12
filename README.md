@@ -10,16 +10,32 @@ I am Lazy Freelance Flutter Developer who doesn't wanna create redux files repea
 
 1. Create State
 2. Create Reducer
+3. Create Middleware
+4. Create Action
 
 ## How to Use
 
-1. [Create State - Step by Step Youtube Video][CREATE_STATE_YOUTUBE]
+- [Create State - Step by Step Youtube Video][CREATE_STATE_YOUTUBE]
 
 ## Features Under Development 
 
-2. Create Middleware
-3. Create Action
-4. Create Redux Set (creates folder with state,reducer,middleware and action file)
+- Create Redux Set :arrow_right:
+    - Creates a folder with action,middlware, reducer and state files.
+
+- Create Redux Parent Set (Its a Parent of all state)
+    - Create a Parent Set.
+    - It has a "Auto Import" feature
+
+## Special Words Explanations ( Ex: Set, Auto Import)
+
+- Set
+    - A folder containes Action, Middleware, Reducer and State files.
+
+- Parent Set
+    - Its a parent of all Set. Its configured by Us as a parent. So, whenever you create a set we will automatically import that in to parent set.
+
+- Auto Import
+    - When you create a set it will automatically imported to Parent Set.
 
 ## Contact
 

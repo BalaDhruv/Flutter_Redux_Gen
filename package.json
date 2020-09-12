@@ -34,7 +34,9 @@
 	],
 	"activationEvents": [
 		"onCommand:flutter-redux-gen.createState",
-		"onCommand:flutter-redux-gen.createReducer"
+		"onCommand:flutter-redux-gen.createReducer",
+		"onCommand:flutter-redux-gen.createMiddleware",
+		"onCommand:flutter-redux-gen.createAction"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -48,6 +50,16 @@
 				"command": "flutter-redux-gen.createReducer",
 				"title": "Create Reducer",
 				"category": "Flutter Redux Gen"
+			},
+			{
+				"command": "flutter-redux-gen.createMiddleware",
+				"title": "Create Middleware",
+				"category": "Flutter Redux Gen"
+			},
+			{
+				"command": "flutter-redux-gen.createAction",
+				"title": "Create Action",
+				"category": "Flutter Redux Gen"
 			}
 		],
 		"menus": {
@@ -59,17 +71,33 @@
 				{
 					"command": "flutter-redux-gen.createReducer",
 					"when": "false"
+				},
+				{
+					"command": "flutter-redux-gen.createMiddleware",
+					"when": "false"
+				},
+				{
+					"command": "flutter-redux-gen.createAction",
+					"when": "false"
 				}
 			],
 			"explorer/context": [
 				{
-                    "command": "flutter-redux-gen.createState",
-                    "group": "navigation@3"
+					"command": "flutter-redux-gen.createState",
+					"group": "navigation@3"
 				},
 				{
-                    "command": "flutter-redux-gen.createReducer",
-                    "group": "navigation@4"
-                }
+					"command": "flutter-redux-gen.createReducer",
+					"group": "navigation@4"
+				},
+				{
+					"command": "flutter-redux-gen.createMiddleware",
+					"group": "navigation@4"
+				},
+				{
+					"command": "flutter-redux-gen.createAction",
+					"group": "navigation@4"
+				}
 			]
 		}
 	},

@@ -4,7 +4,12 @@ All notable changes to the "flutter-redux-gen" extension will be documented in t
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.0.5]
+
 ## [0.0.4]
+
+- Create Middleware
+- Create Action
 
 ## [0.0.3]
 
