@@ -19,18 +19,18 @@ I am Lazy Freelance Flutter Developer who doesn't wanna create redux files repea
 
 ## Features Under Development 
 
-- Create Redux Set 
+- Create Redux <b href="#set-desc" id="set-head">Set</b> 
     - Creates a folder with action,middlware, reducer and state files.
 
-- Create Redux Parent Set (Its a Parent of all state)
+- Create Redux `Parent Set` (Its a Parent of all state)
     - Create a Parent Set.
-    - It has a "Auto Import" feature
+    - It has a `Auto Import` feature
 
 ## Special Words Explanations ( Ex: Set, Auto Import)
 
 | Special Words      |        Description     |
 |        :----      |           :----      |
-| Set                | A folder containes Action, Middleware, Reducer and State files |
+| <b href="#set-head" id="set-desc">Set</b>               | A folder containes Action, Middleware, Reducer and State files |
 | Parent Set         | Its a parent of all Set. Its configured by Us as a parent      |
 | Auto Import        | When you create a set it will automatically imported to Parent Set |
 
