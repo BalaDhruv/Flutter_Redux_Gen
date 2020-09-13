@@ -1,7 +1,12 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
-import { CREATE_STATE_PLACE_HOLDER, NAME_ERROR_MESSAGE,CREATE_ACTION_PLACE_HOLDER, CREATE_MIDDLEWARE_PLACE_HOLDER, CREATE_REDUCER_PLACE_HOLDER, NAME_REG_EXP, DEFAULT_NAME, STATE_EXTENSION, REDUCER_EXTENSION, MIDDLEWARE_EXTENSION, ACTION_EXTENSION } from './resources/constants';
-import { getFormattedReducerName, getFormattedStateName, getFilePath } from './resources/utils';
+import { CREATE_STATE_PLACE_HOLDER, NAME_ERROR_MESSAGE, CREATE_ACTION_PLACE_HOLDER, CREATE_MIDDLEWARE_PLACE_HOLDER, CREATE_REDUCER_PLACE_HOLDER, NAME_REG_EXP, DEFAULT_NAME, STATE_EXTENSION, REDUCER_EXTENSION, MIDDLEWARE_EXTENSION, ACTION_EXTENSION } from './resources/utils/constants';
+import { getStateGenCode } from './resources/gen/state';
+import { getFilePath } from './resources/utils/utils';
+import { getReducerGenCode } from './resources/gen/reducer';
+import { getMiddlewareGenCode } from './resources/gen/middleware';
+import { getActionGenCode } from './resources/gen/action';
+import { createFile, createFolder } from './resources/utils/file-utils';
 
 
 // this method is called when your extension is activated
@@ -107,117 +112,40 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 	context.subscriptions.push(createAction);
-}
 
-function createFile(fPath: string, name: string, extention: string, getGenCode: Function) {
-	const pathWithFileName = fPath + '/' + name.toLocaleLowerCase() + extention;
-	fs.writeFile(pathWithFileName, getGenCode(name), err => {
-		console.log(err);
-		if (err) {
-			vscode.window.showInformationMessage('Please check your path. Otherwise file a issue in Git Repo. Let me help.');
-		} else {
-			vscode.window.showInformationMessage(`${name}${extention} Created Successfully.`);
-		}
+	// Create Redux Set Command Registering
+	let createReduxSet = vscode.commands.registerCommand('flutter-redux-gen.createReduxSet', (args) => {
+
+		let focusedFilePath = getFilePath(args.path);
+		let nameField = vscode.window.createInputBox();
+		let nameFieldValidator = new RegExp(NAME_REG_EXP);
+		nameField.placeholder = CREATE_ACTION_PLACE_HOLDER;
+		nameField.onDidChangeValue((v) => {
+			nameField.validationMessage = nameFieldValidator.test(v) ? NAME_ERROR_MESSAGE : '';
+		});
+		nameField.onDidAccept(() => {
+			if (nameFieldValidator.test(nameField.value)) {
+				nameField.validationMessage = NAME_ERROR_MESSAGE;
+			} else {
+				nameField.hide();
+				var name = nameField.value ? nameField.value : DEFAULT_NAME;
+				var isCreated = createFolder(focusedFilePath,name);
+				if(isCreated){
+					createFile(focusedFilePath+"/"+name, name, ACTION_EXTENSION, getActionGenCode);
+					createFile(focusedFilePath+"/"+name, name, REDUCER_EXTENSION, getReducerGenCode);
+					createFile(focusedFilePath+"/"+name, name, MIDDLEWARE_EXTENSION, getMiddlewareGenCode);
+					createFile(focusedFilePath+"/"+name, name, STATE_EXTENSION, getStateGenCode);
+				}
+				// createFile(focusedFilePath, name, ACTION_EXTENSION, getActionGenCode);
+				nameField.validationMessage = '';
+			}
+		});
+		nameField.show();
 	});
+
+	context.subscriptions.push(createReduxSet);
 }
-
-function getStateGenCode(stateName: string) {
-	const sName = getFormattedStateName(stateName);
-	return `
-class ${sName}State {
-	final bool loading;
-	final String error;
-
-	${sName}State(this.loading, this.error);
-
-	factory ${sName}State.initial() => ${sName}State(false, '');
-
-	${sName}State copyWith({bool loading, String error}) =>
-		${sName}State(loading ?? this.loading, error ?? this.error);
-
-	@override
-	bool operator ==(other) =>
-		identical(this, other) ||
-		other is ${sName}State &&
-			runtimeType == other.runtimeType &&
-			loading == other.loading &&
-			error == other.error;
-
-	@override
-	int get hashCode =>
-		super.hashCode ^ runtimeType.hashCode ^ loading.hashCode ^ error.hashCode;
-
-	@override
-	String toString() => "${sName}State { loading: $loading,  error: $error}";
-}
-	  `;
-}
-
-function getReducerGenCode(name: string) {
-	const sName = getFormattedReducerName(name);
-	return `
-import 'package:redux/redux.dart';
-
-final ${sName}Reducer = combineReducers<AppState>([
-]);
-	`;
-}
-
-function getMiddlewareGenCode(name: string) {
-	const sName = getFormattedStateName(name);
-	return `
-import 'package:redux/redux.dart';
-
-Middleware<AppState> get${sName}(Repository _repo) {
-	return (Store<AppState> store, action, NextDispatcher dispatch) async {
-	dispatch(action);
-	try {
-		// TODO: Write here your middleware logic and api calls
-	} catch (error) {
-		// TODO: API Error handling
-		print(error);
-	}
-	};
-}
-	`;
-}
-
-function getActionGenCode(name: string) {
-	const sName = getFormattedStateName(name);
-	return `
-import 'package:flutter/material.dart';
-
-class ${sName}Action {
-
-	@override
-	String toString() {
-	return '${sName}Action { }';
-	}
-}
-
-class ${sName}SuccessAction {
-	final int isSuccess;
-
-	${sName}SuccessAction({@required this.isSuccess});
-	@override
-	String toString() {
-	return '${sName}SuccessAction { isSuccess: $isSuccess }';
-	}
-}
-
-class ${sName}FailedAction {
-	final String error;
-
-	${sName}FailedAction({@required this.error});
-
-	@override
-	String toString() {
-	return '${sName}FailedAction { error: $error }';
-	}
-}
-	`;
-}
-
 
 // this method is called when your extension is deactivated
-export function deactivate() { }
+export function deactivate() { 
+}

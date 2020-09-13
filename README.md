@@ -8,19 +8,17 @@ I am Lazy Freelance Flutter Developer who doesn't wanna create redux files repea
 
 ## Features
 
-1. Create State 
-2. Create Reducer
-3. Create Middleware
-4. Create Action
+1. Create Redux Set (folder with state, reducer, middleware and action files)
+2. Create State 
+3. Create Reducer
+4. Create Middleware
+5. Create Action
 
 ## How to Use
 
 - [Create State - Step by Step Youtube Video][CREATE_STATE_YOUTUBE]
 
 ## Features Under Development 
-
-- Create Redux `Set`
-    - Creates a folder with action,middlware, reducer and state files.
 
 - Create Redux `Parent Set` (Its a Parent of all state)
     - Create a Parent Set.
