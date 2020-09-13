@@ -1,5 +1,6 @@
 [![LOGO][]][AUTHOR]
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/deda91b070eb4e2393f52ddd031acc03)](https://app.codacy.com/manual/androbalamail/Flutter_Redux_Gen?utm_source=github.com&utm_medium=referral&utm_content=BalaDhruv/Flutter_Redux_Gen&utm_campaign=Badge_Grade_Dashboard)
 [![Discord Chat](https://img.shields.io/badge/chat-discord-blue.svg)](https://discord.gg/KYPkhEx)
 
 ## Introduction 
