@@ -18,7 +18,17 @@ I am Lazy Freelance Flutter Developer who doesn't wanna create redux files repea
 
 ## How to Use
 
-- [Create State - Step by Step Youtube Video][CREATE_STATE_YOUTUBE]
+| Create Redux Set      |        Create State     |
+|        :----:      |           :----:       |
+| [![HTU_CREATE_REXDUX_SET][]][AUTHOR]  | [![HTU_CREATE_STATE][]][AUTHOR] |
+
+| Create Reducer      |        Create Middleware     |
+|        :----:      |           :----:       |
+| [![HTU_CREATE_REDUCER][]][AUTHOR]  | [![HTU_CREATE_MIDDLEWARE][]][AUTHOR] |
+
+| Create Action      |  
+|        :----:      |  
+| [![HTU_CREATE_ACTION][]][AUTHOR]  | 
 
 ## Features Under Development 
 
@@ -42,3 +52,8 @@ I am Lazy Freelance Flutter Developer who doesn't wanna create redux files repea
 [AUTHOR]: https://balamurugan.dev/
 [CONTACT]: https://forms.gle/wXPgEEAYvczjWwys8
 [CREATE_STATE_YOUTUBE]: https://www.youtube.com/watch?v=ISRztcuk2lg
+[HTU_CREATE_REXDUX_SET]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/create-redux-set.gif
+[HTU_CREATE_STATE]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/create-state.gif
+[HTU_CREATE_REDUCER]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/create-reducer.gif
+[HTU_CREATE_MIDDLEWARE]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/create-middleware.gif
+[HTU_CREATE_ACTION]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/create-action.gif
