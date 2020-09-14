@@ -4,6 +4,10 @@ All notable changes to the "flutter-redux-gen" extension will be documented in t
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.0.2]
+
+- Reducer import updated.
+
 ## [1.0.1]
 
 - How to Use Gifs added.
