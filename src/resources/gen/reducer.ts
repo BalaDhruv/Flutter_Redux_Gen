@@ -1,11 +1,13 @@
-import { getFormattedReducerName } from "../utils/utils";
+import { getFormattedReducerName, getFormattedStateName } from "../utils/utils";
 
 function _getReducerGenCode(name: string) {
-	const sName = getFormattedReducerName(name);
+	const rName = getFormattedReducerName(name);
+	const sName = getFormattedStateName(name);
 	return `
 import 'package:redux/redux.dart';
+import './${name}.state.dart';
 
-final ${sName}Reducer = combineReducers<AppState>([
+final ${rName}Reducer = combineReducers<${sName}State>([
 ]);
 	`;
 }

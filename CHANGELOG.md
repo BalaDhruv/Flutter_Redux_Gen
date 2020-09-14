@@ -6,6 +6,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [1.0.1]
 
+- How to Use Gifs added.
+
 ## [1.0.0]
 
 - Create Redux Set (Folder with action, middleware, reducer and state)
