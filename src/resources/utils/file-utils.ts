@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
+import { clearParentSet } from './storage';
 
 function _createFile(fPath: string, name: string, extention: string, getGenCode: Function) {
     const pathWithFileName = fPath + '/' + name.toLocaleLowerCase() + extention;
@@ -22,6 +23,16 @@ function _createFolder(fPath: string, name: string): boolean {
     }
 }
 
+function _isParentSetExist(context: vscode.ExtensionContext){
+    if(context.workspaceState.get("PARENT_PATH") && fs.existsSync(context.workspaceState.get("PARENT_PATH") as string)){
+        return true;
+    }else{
+        clearParentSet(context);
+        return false;
+    }
+
+}
 
 export var createFile = _createFile;
 export var createFolder = _createFolder;
+export var isParentSetExist = _isParentSetExist;

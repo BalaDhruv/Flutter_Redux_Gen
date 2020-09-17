@@ -5,7 +5,7 @@ import { getFilePath } from './resources/utils/utils';
 import { getReducerGenCode } from './resources/gen/reducer';
 import { getMiddlewareGenCode } from './resources/gen/middleware';
 import { getActionGenCode } from './resources/gen/action';
-import { createFile, createFolder } from './resources/utils/file-utils';
+import { createFile, createFolder,isParentSetExist } from './resources/utils/file-utils';
 import { saveParentSet } from './resources/utils/storage';
 import { getParentSetMiddlewareCode, getParentSetReducerCode, getParentSetStateCode } from './resources/gen/parent_set';
 import * as fs from 'fs';
@@ -20,6 +20,11 @@ export function activate(context: vscode.ExtensionContext) {
 		let focusedFilePath = getFilePath(args.path);
 		let nameField = vscode.window.createInputBox();
 		let nameFieldValidator = new RegExp(NAME_REG_EXP);
+		if(isParentSetExist(context)){
+			nameField.prompt = "🥳👍 Parent Set Found.";
+		}else{
+			nameField.prompt = "🚫 Parent Set Found.";
+		}
 		nameField.placeholder = CREATE_STATE_PLACE_HOLDER;
 		nameField.onDidChangeValue((v) => {
 			nameField.validationMessage = nameFieldValidator.test(v) ? NAME_ERROR_MESSAGE : '';
