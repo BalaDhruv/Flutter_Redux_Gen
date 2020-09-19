@@ -9,6 +9,7 @@ import { createFile, createFolder,isParentSetExist } from './resources/utils/fil
 import { saveParentSet } from './resources/utils/storage';
 import { getParentSetMiddlewareCode, getParentSetReducerCode, getParentSetStateCode } from './resources/gen/parent_set';
 import * as fs from 'fs';
+import { AddVariable } from './resources/gen/variable';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -50,6 +51,11 @@ export function activate(context: vscode.ExtensionContext) {
 		let focusedFilePath = getFilePath(args.path);
 		let nameField = vscode.window.createInputBox();
 		let nameFieldValidator = new RegExp(NAME_REG_EXP);
+		if(isParentSetExist(context)){
+			nameField.prompt = "🥳👍 Parent Set Found.";
+		}else{
+			nameField.prompt = "🚫 Parent Set Found.";
+		}
 		nameField.placeholder = CREATE_REDUCER_PLACE_HOLDER;
 		nameField.onDidChangeValue((v) => {
 			nameField.validationMessage = nameFieldValidator.test(v) ? NAME_ERROR_MESSAGE : '';
@@ -75,6 +81,11 @@ export function activate(context: vscode.ExtensionContext) {
 		let focusedFilePath = getFilePath(args.path);
 		let nameField = vscode.window.createInputBox();
 		let nameFieldValidator = new RegExp(NAME_REG_EXP);
+		if(isParentSetExist(context)){
+			nameField.prompt = "🥳👍 Parent Set Found.";
+		}else{
+			nameField.prompt = "🚫 Parent Set Found.";
+		}
 		nameField.placeholder = CREATE_MIDDLEWARE_PLACE_HOLDER;
 		nameField.onDidChangeValue((v) => {
 			nameField.validationMessage = nameFieldValidator.test(v) ? NAME_ERROR_MESSAGE : '';
@@ -100,6 +111,11 @@ export function activate(context: vscode.ExtensionContext) {
 		let focusedFilePath = getFilePath(args.path);
 		let nameField = vscode.window.createInputBox();
 		let nameFieldValidator = new RegExp(NAME_REG_EXP);
+		if(isParentSetExist(context)){
+			nameField.prompt = "🥳👍 Parent Set Found.";
+		}else{
+			nameField.prompt = "🚫 Parent Set Found.";
+		}
 		nameField.placeholder = CREATE_ACTION_PLACE_HOLDER;
 		nameField.onDidChangeValue((v) => {
 			nameField.validationMessage = nameFieldValidator.test(v) ? NAME_ERROR_MESSAGE : '';
@@ -126,6 +142,11 @@ export function activate(context: vscode.ExtensionContext) {
 		let nameField = vscode.window.createInputBox();
 		let nameFieldValidator = new RegExp(NAME_REG_EXP);
 		nameField.placeholder = CREATE_ACTION_PLACE_HOLDER;
+		if(isParentSetExist(context)){
+			nameField.prompt = "🥳👍 Parent Set Found.";
+		}else{
+			nameField.prompt = "🚫 Parent Set Found.";
+		}
 		nameField.onDidChangeValue((v) => {
 			nameField.validationMessage = nameFieldValidator.test(v) ? NAME_ERROR_MESSAGE : '';
 		});
@@ -187,6 +208,16 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 	context.subscriptions.push(createParentSet);
+
+	let addVariable = vscode.commands.registerCommand('flutter-redux-gen.addVariable', (args) => {
+		
+		console.log('INISIDE ADD VARIABLE');
+		var addVariable = new AddVariable();
+		addVariable.init(args,context);
+		
+	});
+
+	context.subscriptions.push(addVariable);
 }
 
 // this method is called when your extension is deactivated
