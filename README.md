@@ -21,7 +21,7 @@ I am Lazy Freelance Flutter Developer who doesn't wanna create redux files repea
 
 |                   Create Redux Set      |               Create State                |
 |                         :----:          |                              :----:       |
-|  [![create_set_gif][]][create_set_gif]  | [![create_state_gif][]][create_state_gif] |
+| [![create_set_gif][]][create_set_gif]   | [![create_state_gif][]][create_state_gif] |
 
 |                    Create Reducer              |        Create Middleware                            |
 |        :----:                                  |                                        :----:       |
