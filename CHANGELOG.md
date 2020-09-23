@@ -4,34 +4,33 @@ All notable changes to the "flutter-redux-gen" extension will be documented in t
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [1.0.2]
+## [Unreleased]
 
-- Reducer import updated.
+## [1.0.2] - 2020-09-14
 
-## [1.0.1]
+  - Reducer import updated.
 
-- How to Use Gifs added.
+## [1.0.1] - 2020-09-13
 
-## [1.0.0]
+  - How to Use Gifs added.
 
-- Create Redux Set (Folder with action, middleware, reducer and state)
+## [1.0.0] - 2020-09-13
 
-## [0.0.4]
+  - Create Redux Set (Folder with action, middleware, reducer and state)
+  - Create Middleware
+  - Create Action
 
-- Create Middleware
-- Create Action
+## [0.0.3] - 2020-09-09
 
-## [0.0.3]
+  - Create Reducer
 
-- Create Reducer
+## [0.0.2] - 2020-09-08
 
-## [0.0.2]
+  - Create State bugs fixed
+  - State name can't name any special chanracter other than "_"
+  - State creation loading and error variable added defaultly.
+  - State Name bug fixed.
 
-- Create State bugs fixed
-- State name can't name any special chanracter other than "_"
-- State creation loading and error variable added defaultly.
-- State Name bug fixed.
+## [0.0.1] - 2020-09-08
 
-## [0.0.1]
-
-- Initial release
+  - Initial release
