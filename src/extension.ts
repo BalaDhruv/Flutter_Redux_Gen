@@ -5,15 +5,14 @@ import { getFilePath } from './resources/utils/utils';
 import { getReducerGenCode } from './resources/gen/reducer';
 import { getMiddlewareGenCode } from './resources/gen/middleware';
 import { getActionGenCode } from './resources/gen/action';
-import { createFile, createFolder,isParentSetExist } from './resources/utils/file-utils';
-import { saveParentSet } from './resources/utils/storage';
-import { getParentSetMiddlewareCode, getParentSetReducerCode, getParentSetStateCode } from './resources/gen/parent_set';
+import { createFile, createFolder, isParentSetExist } from './resources/utils/file-utils';
+import { getParentName, getParentPath, saveParentSet } from './resources/utils/storage';
+import { addSetToParent, getParentSetMiddlewareCode, getParentSetReducerCode, getParentSetStateCode } from './resources/gen/parent_set';
 import * as fs from 'fs';
-import { AddVariable } from './resources/gen/variable';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
+export function activate(context: vscode.ExtensionContext): void {
 
 	// Create State Command Registering
 	let createState = vscode.commands.registerCommand('flutter-redux-gen.createState', (args) => {
@@ -21,9 +20,9 @@ export function activate(context: vscode.ExtensionContext) {
 		let focusedFilePath = getFilePath(args.path);
 		let nameField = vscode.window.createInputBox();
 		let nameFieldValidator = new RegExp(NAME_REG_EXP);
-		if(isParentSetExist(context)){
+		if (isParentSetExist(context)) {
 			nameField.prompt = "🥳👍 Parent Set Found.";
-		}else{
+		} else {
 			nameField.prompt = "🚫 Parent Set Found.";
 		}
 		nameField.placeholder = CREATE_STATE_PLACE_HOLDER;
@@ -51,9 +50,9 @@ export function activate(context: vscode.ExtensionContext) {
 		let focusedFilePath = getFilePath(args.path);
 		let nameField = vscode.window.createInputBox();
 		let nameFieldValidator = new RegExp(NAME_REG_EXP);
-		if(isParentSetExist(context)){
+		if (isParentSetExist(context)) {
 			nameField.prompt = "🥳👍 Parent Set Found.";
-		}else{
+		} else {
 			nameField.prompt = "🚫 Parent Set Found.";
 		}
 		nameField.placeholder = CREATE_REDUCER_PLACE_HOLDER;
@@ -81,9 +80,9 @@ export function activate(context: vscode.ExtensionContext) {
 		let focusedFilePath = getFilePath(args.path);
 		let nameField = vscode.window.createInputBox();
 		let nameFieldValidator = new RegExp(NAME_REG_EXP);
-		if(isParentSetExist(context)){
+		if (isParentSetExist(context)) {
 			nameField.prompt = "🥳👍 Parent Set Found.";
-		}else{
+		} else {
 			nameField.prompt = "🚫 Parent Set Found.";
 		}
 		nameField.placeholder = CREATE_MIDDLEWARE_PLACE_HOLDER;
@@ -111,9 +110,9 @@ export function activate(context: vscode.ExtensionContext) {
 		let focusedFilePath = getFilePath(args.path);
 		let nameField = vscode.window.createInputBox();
 		let nameFieldValidator = new RegExp(NAME_REG_EXP);
-		if(isParentSetExist(context)){
+		if (isParentSetExist(context)) {
 			nameField.prompt = "🥳👍 Parent Set Found.";
-		}else{
+		} else {
 			nameField.prompt = "🚫 Parent Set Found.";
 		}
 		nameField.placeholder = CREATE_ACTION_PLACE_HOLDER;
@@ -142,9 +141,9 @@ export function activate(context: vscode.ExtensionContext) {
 		let nameField = vscode.window.createInputBox();
 		let nameFieldValidator = new RegExp(NAME_REG_EXP);
 		nameField.placeholder = CREATE_ACTION_PLACE_HOLDER;
-		if(isParentSetExist(context)){
+		if (isParentSetExist(context)) {
 			nameField.prompt = "🥳👍 Parent Set Found.";
-		}else{
+		} else {
 			nameField.prompt = "🚫 Parent Set Found.";
 		}
 		nameField.onDidChangeValue((v) => {
@@ -162,8 +161,9 @@ export function activate(context: vscode.ExtensionContext) {
 					createFile(focusedFilePath + "/" + name, name, REDUCER_EXTENSION, getReducerGenCode);
 					createFile(focusedFilePath + "/" + name, name, MIDDLEWARE_EXTENSION, getMiddlewareGenCode);
 					createFile(focusedFilePath + "/" + name, name, STATE_EXTENSION, getStateGenCode);
+					addSetToParent(name, focusedFilePath,getParentName(context),getParentPath(context));
 				}
-				// createFile(focusedFilePath, name, ACTION_EXTENSION, getActionGenCode);
+				createFile(focusedFilePath, name, ACTION_EXTENSION, getActionGenCode);
 				nameField.validationMessage = '';
 			}
 		});
@@ -174,10 +174,10 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// Create Redux Set Command Registering
 	let createParentSet = vscode.commands.registerCommand('flutter-redux-gen.createParentSet', (args) => {
-		
-		if(context.workspaceState.get("PARENT_PATH") && fs.existsSync(context.workspaceState.get("PARENT_PATH") as string)){
+
+		if (context.workspaceState.get("PARENT_PATH") && fs.existsSync(context.workspaceState.get("PARENT_PATH") as string)) {
 			vscode.window.showErrorMessage('Parent Set Already Exist');
-		}else{
+		} else {
 			let focusedFilePath = getFilePath(args.path);
 			let nameField = vscode.window.createInputBox();
 			let nameFieldValidator = new RegExp(NAME_REG_EXP);
@@ -192,7 +192,7 @@ export function activate(context: vscode.ExtensionContext) {
 					nameField.hide();
 					var name = nameField.value ? nameField.value : DEFAULT_NAME;
 					console.log(name);
-	
+
 					var isCreated = createFolder(focusedFilePath, 'store');
 					if (isCreated) {
 						createFile(focusedFilePath + "/store", name, REDUCER_EXTENSION, getParentSetReducerCode);
@@ -209,15 +209,6 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(createParentSet);
 
-	let addVariable = vscode.commands.registerCommand('flutter-redux-gen.addVariable', (args) => {
-		
-		console.log('INISIDE ADD VARIABLE');
-		var addVariable = new AddVariable();
-		addVariable.init(args,context);
-		
-	});
-
-	context.subscriptions.push(addVariable);
 }
 
 // this method is called when your extension is deactivated

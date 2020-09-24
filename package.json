@@ -37,8 +37,7 @@
 		"onCommand:flutter-redux-gen.createReducer",
 		"onCommand:flutter-redux-gen.createMiddleware",
 		"onCommand:flutter-redux-gen.createAction",
-		"onCommand:flutter-redux-gen.createParentSet",
-		"onCommand:flutter-redux-gen.addVariable"
+		"onCommand:flutter-redux-gen.createParentSet"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -72,11 +71,6 @@
 				"command": "flutter-redux-gen.createParentSet",
 				"title": "Create Parent Set",
 				"category": "Flutter Redux Gen"
-			},
-			{
-				"command": "flutter-redux-gen.addVariable",
-				"title": "Add Variable",
-				"category": "Flutter Redux Gen"
 			}
 		],
 		"menus": {
@@ -104,16 +98,6 @@
 				{
 					"command": "flutter-redux-gen.createParentSet",
 					"when": "false"
-				},
-				{
-					"command": "flutter-redux-gen.addVariable",
-					"when": "false"
-				}
-			],
-			"editor/context": [
-				{
-					"command": "flutter-redux-gen.addVariable",
-					"group": "flg@2"
 				}
 			],
 			"explorer/context": [
