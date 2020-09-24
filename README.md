@@ -25,11 +25,11 @@ I am Lazy Freelance Flutter Developer who doesn't wanna create redux files repea
 
 |                    Create Reducer              |        Create Middleware                            |
 |        :----:                                  |                                        :----:       |
-| [![create_reducer_gif][]][create_reducer_gif]  | [![create_middleware_gif][]][create_middleware_gif] |
+| [![create_reducer_gif][]][generate_reducer_youtube]  | [![create_middleware_gif][]][generate_middleware_youtube] |
 
 |                           Create Action      |  
 |                                  :----:      |  
-| [![create_action_gif][]][create_action_gif]  | 
+| [![create_action_gif][]][generate_action_youtube]  | 
 
 ## Features Under Development 
 
@@ -45,6 +45,10 @@ I am Lazy Freelance Flutter Developer who doesn't wanna create redux files repea
 | Parent Set         | Its a parent of all Set. Its configured by Us as a parent          |
 | Auto Import        | When you create a set it will automatically imported to Parent Set |
 
+## Youtube PlayList
+
+[Flutter Redux Gen Youtube][flg_youtube_playlist]
+
 ## Contact
 
 [Click here to add you comments and feedback][contact]
@@ -57,3 +61,9 @@ I am Lazy Freelance Flutter Developer who doesn't wanna create redux files repea
 [create_reducer_gif]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/create-reducer.gif
 [create_middleware_gif]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/create-middleware.gif
 [create_action_gif]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/create-action.gif
+[generate_state_youtube]: https://www.youtube.com/watch?v=vnqoh8owWfI
+[generate_reducer_youtube]: https://www.youtube.com/watch?v=JuCVdc-MWRM
+[generate_middleware_youtube]: https://www.youtube.com/watch?v=9-Ky7X2DW6Q
+[generate_action_youtube]: https://www.youtube.com/watch?v=F7Zk6VMqkFk
+[generate_set_youtube]: https://www.youtube.com/watch?v=aOMU4OHpoWw
+[flg_youtube_playlist]: https://www.youtube.com/watch?v=ISRztcuk2lg&list=PLAtrbE9cCxChjH_1A9mW3qlfBrzlfQk5W
