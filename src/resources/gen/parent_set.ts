@@ -65,12 +65,12 @@ function _addVarToState(name: string, path: string, parentName: string, parentPa
     const sName = getFormattedStateName(name) + 'State';
     const sVarName = getFormattedReducerName(sName);
 
-    const parentStateName= getFormattedStateName(parentName) + 'State';
+    const parentStateName = getFormattedStateName(parentName) + 'State';
 
     // Read State File
     const parentFileName = parentPath + '/' + parentName + STATE_EXTENSION;
     const parentStateCodeList = fs.readFileSync(parentFileName, 'utf8').split('\n');
-    var updatedStateCodeList = parentStateCodeList;
+    var updatedStateCodeList: string[] = parentStateCodeList;
 
     // Add Import Statement
     const currentStateFilePath = `${path}/${name}/${name}${STATE_EXTENSION}`;
@@ -79,13 +79,18 @@ function _addVarToState(name: string, path: string, parentName: string, parentPa
     updatedStateCodeList = [stateImportText, ...updatedStateCodeList];
 
     // Add Varibale to state
-    console.log(sName);
-    console.log(sVarName);
     const initVarText = `final ${sName} ${sVarName}`;
-    console.log(initVarText);
-    console.log(parentStateName);
-    console.log(updatedStateCodeList.findIndex(value=>value.includes(`class ${parentStateName}`)));
-    console.log(updatedStateCodeList[1]);
+    const classIndex = updatedStateCodeList.findIndex(value => value.includes(`class ${parentStateName}`)) + 1;
+    updatedStateCodeList = [...updatedStateCodeList.slice(0, classIndex), initVarText, ...updatedStateCodeList.slice(classIndex)];
+
+    // Add Variable to constructor
+    const initConsVarText = `${sName} ${sVarName},`;
+    const indexOfLine = updatedStateCodeList.findIndex(value => value.includes(`${parentStateName}(`));
+    const indexOfinsertPosition = updatedStateCodeList[indexOfLine].indexOf('(') + 1;
+    const consStr: string = updatedStateCodeList[indexOfLine];
+    updatedStateCodeList[indexOfLine] = consStr.slice(0, indexOfinsertPosition) + initConsVarText + consStr.slice(indexOfinsertPosition);
+
+    // Add Variable to factory Method
 
     // Write Updated Code to Parent File
     // fs.writeFileSync(parentFileName,updatedStateCodeList.join('\n'));
