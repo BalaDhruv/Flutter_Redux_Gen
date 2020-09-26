@@ -35,7 +35,7 @@ export function activate(context: vscode.ExtensionContext): void {
 			} else {
 				nameField.hide();
 				var name = nameField.value ? nameField.value : DEFAULT_NAME;
-				createFile(focusedFilePath, name, STATE_EXTENSION, getStateGenCode);
+				createFile(focusedFilePath, name, STATE_EXTENSION, getStateGenCode, true);
 				nameField.validationMessage = '';
 			}
 		});
@@ -65,7 +65,7 @@ export function activate(context: vscode.ExtensionContext): void {
 			} else {
 				nameField.hide();
 				var name = nameField.value ? nameField.value : DEFAULT_NAME;
-				createFile(focusedFilePath, name, REDUCER_EXTENSION, getReducerGenCode);
+				createFile(focusedFilePath, name, REDUCER_EXTENSION, getReducerGenCode, true);
 				nameField.validationMessage = '';
 			}
 		});
@@ -95,7 +95,7 @@ export function activate(context: vscode.ExtensionContext): void {
 			} else {
 				nameField.hide();
 				var name = nameField.value ? nameField.value : DEFAULT_NAME;
-				createFile(focusedFilePath, name, MIDDLEWARE_EXTENSION, getMiddlewareGenCode);
+				createFile(focusedFilePath, name, MIDDLEWARE_EXTENSION, getMiddlewareGenCode, true);
 				nameField.validationMessage = '';
 			}
 		});
@@ -125,7 +125,7 @@ export function activate(context: vscode.ExtensionContext): void {
 			} else {
 				nameField.hide();
 				var name = nameField.value ? nameField.value : DEFAULT_NAME;
-				createFile(focusedFilePath, name, ACTION_EXTENSION, getActionGenCode);
+				createFile(focusedFilePath, name, ACTION_EXTENSION, getActionGenCode, true);
 				nameField.validationMessage = '';
 			}
 		});
@@ -157,13 +157,13 @@ export function activate(context: vscode.ExtensionContext): void {
 				var name = nameField.value ? nameField.value : DEFAULT_NAME;
 				var isCreated = createFolder(focusedFilePath, name);
 				if (isCreated) {
-					createFile(focusedFilePath + "/" + name, name, ACTION_EXTENSION, getActionGenCode);
-					createFile(focusedFilePath + "/" + name, name, REDUCER_EXTENSION, getReducerGenCode);
-					createFile(focusedFilePath + "/" + name, name, MIDDLEWARE_EXTENSION, getMiddlewareGenCode);
-					createFile(focusedFilePath + "/" + name, name, STATE_EXTENSION, getStateGenCode);
-					addSetToParent(name, focusedFilePath,getParentName(context),getParentPath(context));
+					createFile(focusedFilePath + "/" + name, name, ACTION_EXTENSION, getActionGenCode, false);
+					createFile(focusedFilePath + "/" + name, name, REDUCER_EXTENSION, getReducerGenCode, false);
+					createFile(focusedFilePath + "/" + name, name, MIDDLEWARE_EXTENSION, getMiddlewareGenCode, false);
+					createFile(focusedFilePath + "/" + name, name, STATE_EXTENSION, getStateGenCode, false);
+					addSetToParent(name, focusedFilePath, getParentName(context), getParentPath(context));
+					vscode.window.showInformationMessage(name + ' Set Created.');
 				}
-				createFile(focusedFilePath, name, ACTION_EXTENSION, getActionGenCode);
 				nameField.validationMessage = '';
 			}
 		});
@@ -195,10 +195,11 @@ export function activate(context: vscode.ExtensionContext): void {
 
 					var isCreated = createFolder(focusedFilePath, 'store');
 					if (isCreated) {
-						createFile(focusedFilePath + "/store", name, REDUCER_EXTENSION, getParentSetReducerCode);
-						createFile(focusedFilePath + "/store", name, MIDDLEWARE_EXTENSION, getParentSetMiddlewareCode);
-						createFile(focusedFilePath + "/store", name, STATE_EXTENSION, getParentSetStateCode);
+						createFile(focusedFilePath + "/store", name, REDUCER_EXTENSION, getParentSetReducerCode, false);
+						createFile(focusedFilePath + "/store", name, MIDDLEWARE_EXTENSION, getParentSetMiddlewareCode, false);
+						createFile(focusedFilePath + "/store", name, STATE_EXTENSION, getParentSetStateCode, false);
 						saveParentSet(focusedFilePath + "/store", name, context);
+						vscode.window.showInformationMessage(name + ' Parent Set Created.');
 					}
 					nameField.validationMessage = '';
 				}

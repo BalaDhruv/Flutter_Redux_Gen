@@ -11,31 +11,26 @@ I am Lazy Freelance Flutter Developer who doesn't wanna create redux files repea
 
 ## Features
 
-1.  Create Redux Set (folder with state, reducer, middleware and action files)
-2.  Create State 
-3.  Create Reducer
-4.  Create Middleware
-5.  Create Action
+1.  Create Parent Set
+2.  Create Set (folder with state, reducer, middleware and action files)
+3.  Create State 
+4.  Create Reducer
+5.  Create Middleware
+6.  Create Action
 
 ## How to Use
 
-|                   Create Redux Set      |               Create State                |
+|                   Create Parent Set     |               Create Set                  |
 |                         :----:          |                              :----:       |
-| [![create_set_gif][]][create_set_gif]   | [![create_state_gif][]][create_state_gif] |
+| [![create_parent_set_gif][]][create_parent_set_gif]   | [![create_set_gif][]][create_set_gif]     |
 
-|                    Create Reducer              |        Create Middleware                            |
-|        :----:                                  |                                        :----:       |
-| [![create_reducer_gif][]][generate_reducer_youtube]  | [![create_middleware_gif][]][generate_middleware_youtube] |
+|               Create State                 |                    Create Reducer                    | 
+|                              :----:        |        :----:                                        |  
+| [![create_state_gif][]][create_state_gif]  | [![create_reducer_gif][]][generate_reducer_youtube]  | 
 
-|                           Create Action      |  
-|                                  :----:      |  
-| [![create_action_gif][]][generate_action_youtube]  | 
-
-## Features Under Development 
-
--   Create Redux `Parent Set` (Its a Parent of all state)
-    -   Create a Parent Set.
-    -   It has a `Auto Import` feature
+|        Create Middleware                                  |                           Create Action      |  
+|        :----:                                             |                                  :----:      |  
+| [![create_middleware_gif][]][generate_middleware_youtube] | [![create_action_gif][]][generate_action_youtube]  | 
 
 ## Special Words Explanations ( Ex: Set, Auto Import)
 
@@ -56,6 +51,7 @@ I am Lazy Freelance Flutter Developer who doesn't wanna create redux files repea
 [logo]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/flutter_redux_gen_logo_with_name.png
 [author]: https://balamurugan.dev/
 [contact]: https://forms.gle/wXPgEEAYvczjWwys8
+[create_parent_set_gif]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/create-parent-set.gif
 [create_set_gif]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/create-redux-set.gif
 [create_state_gif]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/create-state.gif
 [create_reducer_gif]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/create-reducer.gif

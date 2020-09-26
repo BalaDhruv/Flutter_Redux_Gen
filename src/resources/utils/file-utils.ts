@@ -2,12 +2,12 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import { clearParentSet } from './storage';
 
-function _createFile(fPath: string, name: string, extention: string, getGenCode: Function) {
+function _createFile(fPath: string, name: string, extention: string, getGenCode: Function, showInfo: boolean) {
     const pathWithFileName = fPath + '/' + name.toLocaleLowerCase() + extention;
     fs.writeFile(pathWithFileName, getGenCode(name), err => {
         if (err) {
             vscode.window.showInformationMessage('Please check your path. Otherwise file a issue in Git Repo. Let me help.');
-        } else {
+        } else if (showInfo) {
             vscode.window.showInformationMessage(`${name}${extention} Created Successfully.`);
         }
     });
@@ -23,10 +23,10 @@ function _createFolder(fPath: string, name: string): boolean {
     }
 }
 
-function _isParentSetExist(context: vscode.ExtensionContext){
-    if(context.workspaceState.get("PARENT_PATH") && fs.existsSync(context.workspaceState.get("PARENT_PATH") as string)){
+function _isParentSetExist(context: vscode.ExtensionContext) {
+    if (context.workspaceState.get("PARENT_PATH") && fs.existsSync(context.workspaceState.get("PARENT_PATH") as string)) {
         return true;
-    }else{
+    } else {
         clearParentSet(context);
         return false;
     }

@@ -6,6 +6,11 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [2.0.0] - 2020-09-26
+
+  - Create Parent Set
+  - Auto Import Set to Parent Set
+
 ## [1.0.2] - 2020-09-14
 
   - Reducer import updated.
