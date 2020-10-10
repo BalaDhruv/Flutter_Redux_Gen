@@ -8,6 +8,11 @@ This is the VS Code Extension to generate Redux Code (State, Reducer, Middleware
 
 I am Lazy Freelance Flutter Developer who doesn't wanna create redux files repeatedly. That's why I am building this extension to solve this problem.
 
+## Article
+Refer the article to know about the extension.
+
+[Generate Redux State, reducer, action, and Middleware via VS Code Extension - Medium](https://medium.com/@androbalamail/generate-redux-state-reducer-action-and-middleware-via-vs-code-extension-flutter-redux-gen-54e1defee2bd)
+
 ## Features
 
 1.  Create Parent Set
