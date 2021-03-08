@@ -191,7 +191,6 @@ export function activate(context: vscode.ExtensionContext): void {
 				} else {
 					nameField.hide();
 					var name = nameField.value ? nameField.value : DEFAULT_NAME;
-					console.log(name);
 
 					var isCreated = createFolder(focusedFilePath, 'store');
 					if (isCreated) {
