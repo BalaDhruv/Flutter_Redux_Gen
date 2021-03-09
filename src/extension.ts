@@ -175,7 +175,7 @@ export function activate(context: vscode.ExtensionContext): void {
 
 	// Create Redux Parent Set Command Registering
 	let createParentSet = vscode.commands.registerCommand('flutter-redux-gen.createParentSet', (args) => {
-		if (context.workspaceState.get("PARENT_PATH") && fs.existsSync(context.workspaceState.get("PARENT_PATH") as string)) {
+		if (isParentSetExist(context)) {
 			vscode.window.showErrorMessage('Parent Set Already Exist');
 		} else {
 			let focusedFilePath = getFilePath(args.fsPath);
