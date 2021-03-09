@@ -9,6 +9,7 @@ import { createFile, createFolder, isParentSetExist } from './resources/utils/fi
 import { getParentName, getParentPath, saveParentSet } from './resources/utils/storage';
 import { addSetToParent, getParentSetMiddlewareCode, getParentSetReducerCode, getParentSetStateCode } from './resources/gen/parent_set';
 import * as fs from 'fs';
+import * as path from 'path'
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -194,10 +195,10 @@ export function activate(context: vscode.ExtensionContext): void {
 
 					var isCreated = createFolder(focusedFilePath, 'store');
 					if (isCreated) {
-						createFile(focusedFilePath + "/store", name, REDUCER_EXTENSION, getParentSetReducerCode, false);
-						createFile(focusedFilePath + "/store", name, MIDDLEWARE_EXTENSION, getParentSetMiddlewareCode, false);
-						createFile(focusedFilePath + "/store", name, STATE_EXTENSION, getParentSetStateCode, false);
-						saveParentSet(focusedFilePath + "/store", name, context);
+						createFile(path.join(focusedFilePath, 'store'), name, REDUCER_EXTENSION, getParentSetReducerCode, false);
+						createFile(path.join(focusedFilePath, 'store'), name, MIDDLEWARE_EXTENSION, getParentSetMiddlewareCode, false);
+						createFile(path.join(focusedFilePath, 'store'), name, STATE_EXTENSION, getParentSetStateCode, false);
+						saveParentSet(path.join(focusedFilePath, 'store'), name, context);
 						vscode.window.showInformationMessage(name + ' Parent Set Created.');
 					}
 					nameField.validationMessage = '';
