@@ -172,7 +172,7 @@ export function activate(context: vscode.ExtensionContext): void {
 
 	context.subscriptions.push(createReduxSet);
 
-	// Create Redux Set Command Registering
+	// Create Redux Parent Set Command Registering
 	let createParentSet = vscode.commands.registerCommand('flutter-redux-gen.createParentSet', (args) => {
 		if (context.workspaceState.get("PARENT_PATH") && fs.existsSync(context.workspaceState.get("PARENT_PATH") as string)) {
 			vscode.window.showErrorMessage('Parent Set Already Exist');
