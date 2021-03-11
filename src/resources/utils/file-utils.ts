@@ -1,9 +1,10 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
+import * as path from 'path'
 import { clearParentSet } from './storage';
 
 function _createFile(fPath: string, name: string, extention: string, getGenCode: Function, showInfo: boolean) {
-    const pathWithFileName = fPath + '/' + name.toLocaleLowerCase() + extention;
+    const pathWithFileName = path.join(fPath, name.toLocaleLowerCase() + extention);
     fs.writeFile(pathWithFileName, getGenCode(name), err => {
         if (err) {
             vscode.window.showInformationMessage('Please check your path. Otherwise file a issue in Git Repo. Let me help.');
@@ -14,8 +15,8 @@ function _createFile(fPath: string, name: string, extention: string, getGenCode:
 }
 
 function _createFolder(fPath: string, name: string): boolean {
-    if (!fs.existsSync(fPath + "/" + name)) {
-        fs.mkdirSync(fPath + "/" + name);
+    if (!fs.existsSync(path.join(fPath, name))) {
+        fs.mkdirSync(path.join(fPath, name));
         return true;
     } else {
         vscode.window.showErrorMessage('Folder Already Exist');
