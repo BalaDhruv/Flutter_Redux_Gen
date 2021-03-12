@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import * as path from 'path';
 
 function _getFormattedStateName(name: string) {
 	return name.split('_').map(word => word[0].toLocaleUpperCase() + word.substring(1)).join('');
@@ -8,15 +9,12 @@ function _getFormattedReducerName(name: string) {
 	return name.split('_').map(word => word[0].toLocaleLowerCase() + word.substring(1)).join('');
 }
 
-function _getFilePath(path: string) {
-	const syncPath = fs.statSync(path);
+function _getFilePath(fPath: string) {
+	const syncPath = fs.statSync(fPath);
 	if (syncPath.isFile()) {
-		var paths = path.split('/');
-		paths.pop();
-		return paths.join('/');
+		return path.dirname(fPath);
 	}
-	return path;
-
+	return fPath;
 }
 
 export var getFormattedStateName = _getFormattedStateName;
