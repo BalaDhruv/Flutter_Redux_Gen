@@ -9,6 +9,7 @@ import { createFile, createFolder, isParentSetExist } from './resources/utils/fi
 import { getParentName, getParentPath, saveParentSet } from './resources/utils/storage';
 import { addSetToParent, getParentSetMiddlewareCode, getParentSetReducerCode, getParentSetStateCode } from './resources/gen/parent_set';
 import * as fs from 'fs';
+import * as path from 'path';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -17,7 +18,7 @@ export function activate(context: vscode.ExtensionContext): void {
 	// Create State Command Registering
 	let createState = vscode.commands.registerCommand('flutter-redux-gen.createState', (args) => {
 
-		let focusedFilePath = getFilePath(args.path);
+		let focusedFilePath = getFilePath(args.fsPath);
 		let nameField = vscode.window.createInputBox();
 		let nameFieldValidator = new RegExp(NAME_REG_EXP);
 		if (isParentSetExist(context)) {
@@ -47,7 +48,7 @@ export function activate(context: vscode.ExtensionContext): void {
 	// Create State Command Registering
 	let createReducer = vscode.commands.registerCommand('flutter-redux-gen.createReducer', (args) => {
 
-		let focusedFilePath = getFilePath(args.path);
+		let focusedFilePath = getFilePath(args.fsPath);
 		let nameField = vscode.window.createInputBox();
 		let nameFieldValidator = new RegExp(NAME_REG_EXP);
 		if (isParentSetExist(context)) {
@@ -77,7 +78,7 @@ export function activate(context: vscode.ExtensionContext): void {
 	// Create State Command Registering
 	let createMiddleware = vscode.commands.registerCommand('flutter-redux-gen.createMiddleware', (args) => {
 
-		let focusedFilePath = getFilePath(args.path);
+		let focusedFilePath = getFilePath(args.fsPath);
 		let nameField = vscode.window.createInputBox();
 		let nameFieldValidator = new RegExp(NAME_REG_EXP);
 		if (isParentSetExist(context)) {
@@ -107,7 +108,7 @@ export function activate(context: vscode.ExtensionContext): void {
 	// Create State Command Registering
 	let createAction = vscode.commands.registerCommand('flutter-redux-gen.createAction', (args) => {
 
-		let focusedFilePath = getFilePath(args.path);
+		let focusedFilePath = getFilePath(args.fsPath);
 		let nameField = vscode.window.createInputBox();
 		let nameFieldValidator = new RegExp(NAME_REG_EXP);
 		if (isParentSetExist(context)) {
@@ -137,7 +138,7 @@ export function activate(context: vscode.ExtensionContext): void {
 	// Create Redux Set Command Registering
 	let createReduxSet = vscode.commands.registerCommand('flutter-redux-gen.createReduxSet', (args) => {
 
-		let focusedFilePath = getFilePath(args.path);
+		let focusedFilePath = getFilePath(args.fsPath);
 		let nameField = vscode.window.createInputBox();
 		let nameFieldValidator = new RegExp(NAME_REG_EXP);
 		nameField.placeholder = CREATE_ACTION_PLACE_HOLDER;
@@ -172,13 +173,12 @@ export function activate(context: vscode.ExtensionContext): void {
 
 	context.subscriptions.push(createReduxSet);
 
-	// Create Redux Set Command Registering
+	// Create Redux Parent Set Command Registering
 	let createParentSet = vscode.commands.registerCommand('flutter-redux-gen.createParentSet', (args) => {
-
-		if (context.workspaceState.get("PARENT_PATH") && fs.existsSync(context.workspaceState.get("PARENT_PATH") as string)) {
+		if (isParentSetExist(context)) {
 			vscode.window.showErrorMessage('Parent Set Already Exist');
 		} else {
-			let focusedFilePath = getFilePath(args.path);
+			let focusedFilePath = getFilePath(args.fsPath);
 			let nameField = vscode.window.createInputBox();
 			let nameFieldValidator = new RegExp(NAME_REG_EXP);
 			nameField.placeholder = CREATE_ACTION_PLACE_HOLDER;
@@ -194,10 +194,10 @@ export function activate(context: vscode.ExtensionContext): void {
 
 					var isCreated = createFolder(focusedFilePath, 'store');
 					if (isCreated) {
-						createFile(focusedFilePath + "/store", name, REDUCER_EXTENSION, getParentSetReducerCode, false);
-						createFile(focusedFilePath + "/store", name, MIDDLEWARE_EXTENSION, getParentSetMiddlewareCode, false);
-						createFile(focusedFilePath + "/store", name, STATE_EXTENSION, getParentSetStateCode, false);
-						saveParentSet(focusedFilePath + "/store", name, context);
+						createFile(path.join(focusedFilePath, 'store'), name, REDUCER_EXTENSION, getParentSetReducerCode, false);
+						createFile(path.join(focusedFilePath, 'store'), name, MIDDLEWARE_EXTENSION, getParentSetMiddlewareCode, false);
+						createFile(path.join(focusedFilePath, 'store'), name, STATE_EXTENSION, getParentSetStateCode, false);
+						saveParentSet(path.join(focusedFilePath, 'store'), name, context);
 						vscode.window.showInformationMessage(name + ' Parent Set Created.');
 					}
 					nameField.validationMessage = '';
