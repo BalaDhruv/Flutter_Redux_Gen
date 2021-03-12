@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
-import * as path from 'path'
+import * as path from 'path';
 import { clearParentSet } from './storage';
 
 function _createFile(fPath: string, name: string, extention: string, getGenCode: Function, showInfo: boolean) {

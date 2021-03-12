@@ -9,7 +9,7 @@ import { createFile, createFolder, isParentSetExist } from './resources/utils/fi
 import { getParentName, getParentPath, saveParentSet } from './resources/utils/storage';
 import { addSetToParent, getParentSetMiddlewareCode, getParentSetReducerCode, getParentSetStateCode } from './resources/gen/parent_set';
 import * as fs from 'fs';
-import * as path from 'path'
+import * as path from 'path';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
