@@ -123,10 +123,10 @@ function _addVarToState(name: string, path: string, parentName: string, parentPa
         let initConsVarText = `this.${sVarName},`;
         let consSearchString = `${parentStateName}(`;
         if (updatedStateCodeList.findIndex(value => value.includes(`${parentStateName}({`)) > -1) {
-            initConsVarText = `@required this.${sVarName},`;
+            initConsVarText = `required this.${sVarName},`;
             consSearchString = `${parentStateName}({`;
         } else if (updatedStateCodeList.findIndex(value => value.includes(`${parentStateName}(`))) {
-            initConsVarText = `{ @required this.${sVarName} }`;
+            initConsVarText = `{ required this.${sVarName} }`;
         }
         const indexOfLine = updatedStateCodeList.findIndex(value => value.includes(`${parentStateName}(`));
         const indexOfinsertPosition = updatedStateCodeList[indexOfLine].indexOf(consSearchString) + consSearchString.length;
