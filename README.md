@@ -44,6 +44,11 @@ Refer the article to know about the extension.
 | Parent Set         | Its a parent of all Set. Its configured by Us as a parent          |
 | Auto Import        | When you create a set it will automatically imported to Parent Set |
 
+## Upcoming Features
+
+1.  Add Variable to state on one click
+2.  Tree view of states - Explorer View
+
 ## Youtube PlayList
 
 [Flutter Redux Gen Youtube][flg_youtube_playlist]
