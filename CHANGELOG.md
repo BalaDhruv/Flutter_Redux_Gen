@@ -6,6 +6,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [2.0.1] - 2020-09-26
+
+  - @ - removed from required keyword
+
 ## [2.0.0] - 2020-09-26
 
   - Create Parent Set
