@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import { CREATE_STATE_PLACE_HOLDER, NAME_ERROR_MESSAGE, CREATE_ACTION_PLACE_HOLDER, CREATE_MIDDLEWARE_PLACE_HOLDER, CREATE_REDUCER_PLACE_HOLDER, NAME_REG_EXP, DEFAULT_NAME, STATE_EXTENSION, REDUCER_EXTENSION, MIDDLEWARE_EXTENSION, ACTION_EXTENSION } from './resources/utils/constants';
-import { getStateGenCode } from './resources/gen/state';
+import { CREATE_STATE_PLACE_HOLDER, NAME_ERROR_MESSAGE, CREATE_ACTION_PLACE_HOLDER, CREATE_MIDDLEWARE_PLACE_HOLDER, CREATE_REDUCER_PLACE_HOLDER, NAME_REG_EXP, DEFAULT_NAME, STATE_EXTENSION, REDUCER_EXTENSION, MIDDLEWARE_EXTENSION, ACTION_EXTENSION, ADD_VARIABLE_TO_STATE_PLACEHOLDER, VARIABLE_NAME_ERROR_MESSAGE } from './resources/utils/constants';
+import { getStateGenCode, addVariableToState } from './resources/gen/state';
 import { getFilePath } from './resources/utils/utils';
 import { getReducerGenCode } from './resources/gen/reducer';
 import { getMiddlewareGenCode } from './resources/gen/middleware';
@@ -8,12 +8,30 @@ import { getActionGenCode } from './resources/gen/action';
 import { createFile, createFolder, isParentSetExist } from './resources/utils/file-utils';
 import { getParentName, getParentPath, saveParentSet } from './resources/utils/storage';
 import { addSetToParent, getParentSetMiddlewareCode, getParentSetReducerCode, getParentSetStateCode } from './resources/gen/parent_set';
-import * as fs from 'fs';
 import * as path from 'path';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext): void {
+
+	let createVariableInState = vscode.commands.registerCommand('flutter-redux-gen.createVariableInState', async (args) => {
+		let nameFieldValidator = new RegExp(NAME_REG_EXP);
+		var varType = await vscode.window.showQuickPick(["Number", "Int", "Double", "String", "Bool", "List", "Set", "Map", "Dynamic"],
+			{ title: "Select Variable Type", canPickMany: false });
+		if (varType === undefined) {
+			return "No data";
+		}
+		let varName = await vscode.window.showInputBox({
+			title: "Enter Variable Name",
+			validateInput: (val) => nameFieldValidator.test(val) ? NAME_ERROR_MESSAGE : '',
+		});
+		if (varName === undefined) {
+			return "No data";
+		}
+		addVariableToState(args.path, varType, varName);
+	});
+
+	context.subscriptions.push(createVariableInState);
 
 	// Create State Command Registering
 	let createState = vscode.commands.registerCommand('flutter-redux-gen.createState', (args) => {
