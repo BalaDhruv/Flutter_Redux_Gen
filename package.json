@@ -32,12 +32,19 @@
 		"Other"
 	],
 	"activationEvents": [
+		"workspaceContains:pubspec.yaml",
+		"workspaceContains:*/pubspec.yaml",
+		"workspaceContains:*/*/pubspec.yaml",
+		"workspaceContains:*.dart",
+		"workspaceContains:*/*.dart",
+		"workspaceContains:*/*/*.dart",
 		"onCommand:flutter-redux-gen.createReduxSet",
 		"onCommand:flutter-redux-gen.createState",
 		"onCommand:flutter-redux-gen.createReducer",
 		"onCommand:flutter-redux-gen.createMiddleware",
 		"onCommand:flutter-redux-gen.createAction",
-		"onCommand:flutter-redux-gen.createParentSet"
+		"onCommand:flutter-redux-gen.createParentSet",
+		"onCommand:flutter-redux-gen.createVariableInState"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -70,6 +77,11 @@
 				"command": "flutter-redux-gen.createParentSet",
 				"title": "Create Parent Set",
 				"category": "Flutter Redux Gen"
+			},
+			{
+				"command": "flutter-redux-gen.createVariableInState",
+				"title": "Add Variable to State",
+				"category": "Flutter Redux Gen"
 			}
 		],
 		"menus": {
@@ -96,15 +108,25 @@
 				{
 					"command": "flutter-redux-gen.createParentSet",
 					"when": "false"
+				},
+				{
+					"command": "flutter-redux-gen.createVariableInState",
+					"when": "false"
 				}
 			],
+			"editor/context": [{
+				"command": "flutter-redux-gen.createVariableInState",
+				"group": "flg",
+				"when": "resourceFilename =~ /.state.dart/"
+			}],
 			"explorer/context": [{
 					"command": "flutter-redux-gen.createParentSet",
 					"group": "flg@2"
 				},
 				{
 					"command": "flutter-redux-gen.createReduxSet",
-					"group": "flg@2"
+					"group": "flg@2",
+					"when": "true"
 				},
 				{
 					"command": "flutter-redux-gen.createState",
@@ -137,7 +159,7 @@
 		"@types/glob": "^7.1.3",
 		"@types/mocha": "^8.0.0",
 		"@types/node": "^14.0.27",
-		"@types/vscode": "^1.48.0",
+		"@types/vscode": "^1.50.0",
 		"@typescript-eslint/eslint-plugin": "^3.8.0",
 		"@typescript-eslint/parser": "^3.8.0",
 		"eslint": "^7.6.0",
