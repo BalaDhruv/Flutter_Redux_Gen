@@ -1,5 +1,6 @@
 import { getFormattedStateName } from "../utils/utils";
 import * as fs from 'fs';
+const _ = require('lodash');
 
 function _getStateGenCode(stateName: string) {
 	const sName = getFormattedStateName(stateName);
@@ -55,7 +56,6 @@ function _addVariableToState(path: string, varType: string, varName: string) {
 		updatedStateCodeList = [...updatedStateCodeList.slice(0, classIndex), initVarText, ...updatedStateCodeList.slice(classIndex)];
 	}
 
-
 	// Add Variable to constructor
 	if (updatedStateCodeList.findIndex(value => value.includes(`${stateName}({`)) > -1 || updatedStateCodeList.findIndex(value => value.includes(`${stateName}(`))) {
 		hasConstructor = true;
@@ -80,6 +80,18 @@ function _addVariableToState(path: string, varType: string, varName: string) {
 		const indexOfInitialInsert = updatedStateCodeList[indexOfInitialMethodLine].indexOf(`${stateName}(`) + stateName.length + 1;
 		updatedStateCodeList[indexOfInitialMethodLine] = updatedStateCodeList[indexOfInitialMethodLine].slice(0, indexOfInitialInsert) + initialVarText + updatedStateCodeList[indexOfInitialMethodLine].slice(indexOfInitialInsert);
 	}
+
+	// Add Var CopyWith Method
+	const copyWithText = `${varType}? ${varName},`;
+	const indexOfCopyWithLine = updatedStateCodeList.findIndex(value => value.includes(`${stateName} copyWith({`));
+	const indexOfInitialInsert = updatedStateCodeList[indexOfCopyWithLine].indexOf(`${stateName} copyWith({`) + `${stateName} copyWith({`.length;
+	updatedStateCodeList[indexOfCopyWithLine] = updatedStateCodeList[indexOfCopyWithLine].slice(0, indexOfInitialInsert) + copyWithText + updatedStateCodeList[indexOfCopyWithLine].slice(indexOfInitialInsert);
+
+	// Add Var CopyWith Res Method
+	const copyWithResText = `${varName} ?? this.${varName},`;
+	const indexOfCopyWithResLine = _.findLastIndex(updatedStateCodeList, function (value: any) { return value.includes(`${stateName}(`); });
+	const indexOfCWResInitialInsert = updatedStateCodeList[indexOfCopyWithResLine].indexOf(`${stateName}(`) + `${stateName}(`.length;
+	updatedStateCodeList[indexOfCopyWithResLine] = updatedStateCodeList[indexOfCopyWithResLine].slice(0, indexOfCWResInitialInsert) + copyWithResText + updatedStateCodeList[indexOfCopyWithResLine].slice(indexOfCWResInitialInsert);
 
 	// Add Var to Operator Method
 	const operatorText = ` && ${varName} == other.${varName} `;
