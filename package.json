@@ -48,7 +48,8 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [{
+		"commands": [
+			{
 				"command": "flutter-redux-gen.createReduxSet",
 				"title": "Create Set",
 				"category": "Flutter Redux Gen"
@@ -85,7 +86,8 @@
 			}
 		],
 		"menus": {
-			"commandPalette": [{
+			"commandPalette": [
+				{
 					"command": "flutter-redux-gen.createReduxSet",
 					"when": "false"
 				},
@@ -114,12 +116,15 @@
 					"when": "false"
 				}
 			],
-			"editor/context": [{
-				"command": "flutter-redux-gen.createVariableInState",
-				"group": "flg",
-				"when": "resourceFilename =~ /.state.dart/"
-			}],
-			"explorer/context": [{
+			"editor/context": [
+				{
+					"command": "flutter-redux-gen.createVariableInState",
+					"group": "flg",
+					"when": "resourceFilename =~ /.state.dart/"
+				}
+			],
+			"explorer/context": [
+				{
 					"command": "flutter-redux-gen.createParentSet",
 					"group": "flg@2"
 				},
@@ -167,5 +172,8 @@
 		"mocha": "^8.0.1",
 		"typescript": "^3.8.3",
 		"vscode-test": "^1.4.0"
+	},
+	"dependencies": {
+		"lodash": "^4.17.21"
 	}
 }
