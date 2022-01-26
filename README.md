@@ -38,9 +38,9 @@ Refer the article to know about the extension.
 | :-------------------------------------------------------: | :-----------------------------------------------: |
 | [![create_middleware_gif][]][generate_middleware_youtube] | [![create_action_gif][]][generate_action_youtube] |
 
-|                  Add Variable to State                   |
-| :------------------------------------------------------: |
-| [![add_var_to_state_gif][]][generate_middleware_youtube] |
+|                 Add Variable to State                 |
+| :---------------------------------------------------: |
+| [![add_var_to_state_gif][]][add_var_to_state_youtube] |
 
 ## Special Words Explanations ( Ex: Set, Auto Import)
 
@@ -78,4 +78,5 @@ Refer the article to know about the extension.
 [generate_middleware_youtube]: https://www.youtube.com/watch?v=9-Ky7X2DW6Q
 [generate_action_youtube]: https://www.youtube.com/watch?v=F7Zk6VMqkFk
 [generate_set_youtube]: https://www.youtube.com/watch?v=aOMU4OHpoWw
+[add_var_to_state_youtube]: https://youtu.be/Pco-2Qq_XGA?list=PLAtrbE9cCxChjH_1A9mW3qlfBrzlfQk5W
 [flg_youtube_playlist]: https://www.youtube.com/watch?v=ISRztcuk2lg&list=PLAtrbE9cCxChjH_1A9mW3qlfBrzlfQk5W
