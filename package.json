@@ -2,7 +2,7 @@
 	"name": "flutter-redux-gen",
 	"displayName": "Flutter Redux Gen (FRG)",
 	"description": "This is the VS Code Extension to generate Redux Code (State, Reducer, Middleware and Action).",
-	"version": "3.0.2",
+	"version": "3.0.3",
 	"publisher": "BalaDhruv",
 	"author": {
 		"name": "Balamurugan",
@@ -48,8 +48,7 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [
-			{
+		"commands": [{
 				"command": "flutter-redux-gen.createReduxSet",
 				"title": "Create Set",
 				"category": "Flutter Redux Gen"
@@ -86,8 +85,7 @@
 			}
 		],
 		"menus": {
-			"commandPalette": [
-				{
+			"commandPalette": [{
 					"command": "flutter-redux-gen.createReduxSet",
 					"when": "false"
 				},
@@ -116,15 +114,12 @@
 					"when": "false"
 				}
 			],
-			"editor/context": [
-				{
-					"command": "flutter-redux-gen.createVariableInState",
-					"group": "flg",
-					"when": "resourceFilename =~ /.state.dart/"
-				}
-			],
-			"explorer/context": [
-				{
+			"editor/context": [{
+				"command": "flutter-redux-gen.createVariableInState",
+				"group": "flg",
+				"when": "resourceFilename =~ /.state.dart/"
+			}],
+			"explorer/context": [{
 					"command": "flutter-redux-gen.createParentSet",
 					"group": "flg@2"
 				},
@@ -164,7 +159,7 @@
 		"@types/glob": "^7.1.3",
 		"@types/mocha": "^8.0.0",
 		"@types/node": "^14.0.27",
-		"@types/vscode": "^1.50.0",
+		"@types/vscode": "^1.48.0",
 		"@typescript-eslint/eslint-plugin": "^3.8.0",
 		"@typescript-eslint/parser": "^3.8.0",
 		"eslint": "^7.6.0",
