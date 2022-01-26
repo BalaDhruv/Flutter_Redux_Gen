@@ -16,7 +16,7 @@ class ${sName}Action {
 class ${sName}SuccessAction {
 	final int isSuccess;
 
-	${sName}SuccessAction({@required this.isSuccess});
+	${sName}SuccessAction({required this.isSuccess});
 	@override
 	String toString() {
 	return '${sName}SuccessAction { isSuccess: $isSuccess }';
@@ -26,7 +26,7 @@ class ${sName}SuccessAction {
 class ${sName}FailedAction {
 	final String error;
 
-	${sName}FailedAction({@required this.error});
+	${sName}FailedAction({required this.error});
 
 	@override
 	String toString() {
