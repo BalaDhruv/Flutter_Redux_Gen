@@ -12,7 +12,7 @@ class ${sName}State {
 
 	factory ${sName}State.initial() => ${sName}State(false, '');
 
-	${sName}State copyWith({bool loading, String error}) =>
+	${sName}State copyWith({bool? loading, String? error}) =>
 		${sName}State(loading ?? this.loading, error ?? this.error);
 
 	@override
