@@ -52,8 +52,7 @@ Refer the article to know about the extension.
 
 ## Upcoming Features
 
-1.  Add Variable to state on one click
-2.  Tree view of states - Explorer View
+1.  Tree view of states - Explorer View
 
 ## Youtube PlayList
 

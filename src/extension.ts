@@ -1,14 +1,15 @@
 import * as vscode from 'vscode';
-import { CREATE_STATE_PLACE_HOLDER, NAME_ERROR_MESSAGE, CREATE_ACTION_PLACE_HOLDER, CREATE_MIDDLEWARE_PLACE_HOLDER, CREATE_REDUCER_PLACE_HOLDER, NAME_REG_EXP, DEFAULT_NAME, STATE_EXTENSION, REDUCER_EXTENSION, MIDDLEWARE_EXTENSION, ACTION_EXTENSION, ADD_VARIABLE_TO_STATE_PLACEHOLDER, VARIABLE_NAME_ERROR_MESSAGE } from './resources/utils/constants';
+import { CREATE_STATE_PLACE_HOLDER, NAME_ERROR_MESSAGE, CREATE_ACTION_PLACE_HOLDER, CREATE_MIDDLEWARE_PLACE_HOLDER, CREATE_REDUCER_PLACE_HOLDER, NAME_REG_EXP, DEFAULT_NAME, STATE_EXTENSION, REDUCER_EXTENSION, MIDDLEWARE_EXTENSION, ACTION_EXTENSION, ADD_VARIABLE_TO_STATE_PLACEHOLDER, VARIABLE_NAME_ERROR_MESSAGE, SELECT_PARENT_SET } from './resources/utils/constants';
 import { getStateGenCode, addVariableToState } from './resources/gen/state';
 import { getFilePath } from './resources/utils/utils';
 import { getReducerGenCode } from './resources/gen/reducer';
 import { getMiddlewareGenCode } from './resources/gen/middleware';
 import { getActionGenCode } from './resources/gen/action';
-import { createFile, createFolder, isParentSetExist } from './resources/utils/file-utils';
+import { checkAndSelectParentSetIfAlreadyExist, createFile, createFolder, isParentSetExist } from './resources/utils/file-utils';
 import { getParentName, getParentPath, saveParentSet } from './resources/utils/storage';
 import { addSetToParent, getParentSetMiddlewareCode, getParentSetReducerCode, getParentSetStateCode } from './resources/gen/parent_set';
 import * as path from 'path';
+import { fstat, fsyncSync, readdirSync, statSync } from 'fs';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -154,8 +155,12 @@ export function activate(context: vscode.ExtensionContext): void {
 	context.subscriptions.push(createAction);
 
 	// Create Redux Set Command Registering
-	let createReduxSet = vscode.commands.registerCommand('flutter-redux-gen.createReduxSet', (args) => {
-
+	let createReduxSet = vscode.commands.registerCommand('flutter-redux-gen.createReduxSet', async (args) => {
+		if (!isParentSetExist(context)) {
+			// Checking to see if the project moved or opened if another vscode editor 
+			// Try and find the parent Set
+			await checkAndSelectParentSetIfAlreadyExist(args, context);
+		}
 		let focusedFilePath = getFilePath(args.fsPath);
 		let nameField = vscode.window.createInputBox();
 		let nameFieldValidator = new RegExp(NAME_REG_EXP);
