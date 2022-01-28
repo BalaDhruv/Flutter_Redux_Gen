@@ -9,6 +9,7 @@ export const ADD_VARIABLE_TO_STATE_PLACEHOLDER = 'Enter Variable Name';
 export const CREATE_REDUCER_PLACE_HOLDER = 'Enter Reducer Name';
 export const CREATE_MIDDLEWARE_PLACE_HOLDER = 'Enter Middleware Name';
 export const CREATE_ACTION_PLACE_HOLDER = 'Enter Action File Name';
+export const SELECT_PARENT_SET = 'Select Parent Set';
 export const NAME_ERROR_MESSAGE = 'Please use name without space. Consider using "_"';
 export const VARIABLE_NAME_ERROR_MESSAGE = 'Please use name without space. Consider using camelCase';
 export const NAME_REG_EXP = /[`0-9 ~!@#$%^&*()|+\-=?;:'",.<>\{\}\[\]\\\/]/;
