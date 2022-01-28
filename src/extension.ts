@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { CREATE_STATE_PLACE_HOLDER, NAME_ERROR_MESSAGE, CREATE_ACTION_PLACE_HOLDER, CREATE_MIDDLEWARE_PLACE_HOLDER, CREATE_REDUCER_PLACE_HOLDER, NAME_REG_EXP, DEFAULT_NAME, STATE_EXTENSION, REDUCER_EXTENSION, MIDDLEWARE_EXTENSION, ACTION_EXTENSION, ADD_VARIABLE_TO_STATE_PLACEHOLDER, VARIABLE_NAME_ERROR_MESSAGE } from './resources/utils/constants';
+import { CREATE_STATE_PLACE_HOLDER, NAME_ERROR_MESSAGE, CREATE_ACTION_PLACE_HOLDER, CREATE_MIDDLEWARE_PLACE_HOLDER, CREATE_REDUCER_PLACE_HOLDER, NAME_REG_EXP, DEFAULT_NAME, STATE_EXTENSION, REDUCER_EXTENSION, MIDDLEWARE_EXTENSION, ACTION_EXTENSION, ADD_VARIABLE_TO_STATE_PLACEHOLDER, VARIABLE_NAME_ERROR_MESSAGE, SELECT_PARENT_SET } from './resources/utils/constants';
 import { getStateGenCode, addVariableToState } from './resources/gen/state';
 import { getFilePath } from './resources/utils/utils';
 import { getReducerGenCode } from './resources/gen/reducer';
@@ -9,6 +9,7 @@ import { createFile, createFolder, isParentSetExist } from './resources/utils/fi
 import { getParentName, getParentPath, saveParentSet } from './resources/utils/storage';
 import { addSetToParent, getParentSetMiddlewareCode, getParentSetReducerCode, getParentSetStateCode } from './resources/gen/parent_set';
 import * as path from 'path';
+import { fstat, fsyncSync, readdirSync, statSync } from 'fs';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -153,9 +154,32 @@ export function activate(context: vscode.ExtensionContext): void {
 
 	context.subscriptions.push(createAction);
 
-	// Create Redux Set Command Registering
-	let createReduxSet = vscode.commands.registerCommand('flutter-redux-gen.createReduxSet', (args) => {
+	const trySetParent = async (args: any) => {
+		const isFile = statSync(args.path).isFile();
+		const dir = isFile ? path.dirname(args.path) : args.path;
+		const sets = readdirSync(dir).filter(file => file.endsWith(STATE_EXTENSION));
+		if (sets.length === 0) {
+			return;
+		}
 
+		await vscode.window.showQuickPick(sets, {
+			title: SELECT_PARENT_SET
+		})
+			.then(selectedSet => {
+				if (!selectedSet) {
+					return;
+				}
+
+				saveParentSet(dir, path.basename(selectedSet, STATE_EXTENSION), context);
+			});
+			
+	};
+
+	// Create Redux Set Command Registering
+	let createReduxSet = vscode.commands.registerCommand('flutter-redux-gen.createReduxSet', async (args) => {
+		if (!isParentSetExist(context)) {
+			await trySetParent(args);
+		}
 		let focusedFilePath = getFilePath(args.fsPath);
 		let nameField = vscode.window.createInputBox();
 		let nameFieldValidator = new RegExp(NAME_REG_EXP);
