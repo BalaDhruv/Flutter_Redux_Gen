@@ -44,7 +44,8 @@
 		"onCommand:flutter-redux-gen.createMiddleware",
 		"onCommand:flutter-redux-gen.createAction",
 		"onCommand:flutter-redux-gen.createParentSet",
-		"onCommand:flutter-redux-gen.createVariableInState"
+		"onCommand:flutter-redux-gen.createVariableInState",
+		"onCommand:flutter-redux-gen.selectParentSet"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -82,6 +83,11 @@
 				"command": "flutter-redux-gen.createVariableInState",
 				"title": "Add Variable to State",
 				"category": "Flutter Redux Gen"
+			},
+			{
+				"command": "flutter-redux-gen.selectParentSet",
+				"title": "Select Parent Set",
+				"category": "Flutter Redux Gen"
 			}
 		],
 		"menus": {
@@ -112,6 +118,9 @@
 				{
 					"command": "flutter-redux-gen.createVariableInState",
 					"when": "false"
+				},
+				{
+					"command": "flutter-redux-gen.selectParentSet"
 				}
 			],
 			"editor/context": [{

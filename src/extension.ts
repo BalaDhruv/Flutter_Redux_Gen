@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { CREATE_STATE_PLACE_HOLDER, NAME_ERROR_MESSAGE, CREATE_ACTION_PLACE_HOLDER, CREATE_MIDDLEWARE_PLACE_HOLDER, CREATE_REDUCER_PLACE_HOLDER, NAME_REG_EXP, DEFAULT_NAME, STATE_EXTENSION, REDUCER_EXTENSION, MIDDLEWARE_EXTENSION, ACTION_EXTENSION, ADD_VARIABLE_TO_STATE_PLACEHOLDER, VARIABLE_NAME_ERROR_MESSAGE, SELECT_PARENT_SET } from './resources/utils/constants';
+import { CREATE_STATE_PLACE_HOLDER, NAME_ERROR_MESSAGE, CREATE_ACTION_PLACE_HOLDER, CREATE_MIDDLEWARE_PLACE_HOLDER, CREATE_REDUCER_PLACE_HOLDER, NAME_REG_EXP, DEFAULT_NAME, STATE_EXTENSION, REDUCER_EXTENSION, MIDDLEWARE_EXTENSION, ACTION_EXTENSION, ADD_VARIABLE_TO_STATE_PLACEHOLDER, VARIABLE_NAME_ERROR_MESSAGE, SELECT_PARENT_SET, NOT_FOUND_ANY_SET_FILE, NO_FOLDER_IN_WORKSPACE_FOUND, STATE_FILE_RELATIVE_PATTERN, CURRENT_PARENT, SUCCESFULLY_SET_PARENT } from './resources/utils/constants';
 import { getStateGenCode, addVariableToState } from './resources/gen/state';
 import { getFilePath } from './resources/utils/utils';
 import { getReducerGenCode } from './resources/gen/reducer';
@@ -228,6 +228,39 @@ export function activate(context: vscode.ExtensionContext): void {
 			});
 			nameField.show();
 		}
+	});
+
+	vscode.commands.registerCommand('flutter-redux-gen.selectParentSet', async (args) => {
+		const folders = vscode.workspace.workspaceFolders;
+		if (!folders) {
+			return vscode.window.showErrorMessage(NO_FOLDER_IN_WORKSPACE_FOUND);
+		}
+
+		let sets: vscode.Uri[] = [];
+		const fillSetsArray = folders.map(folder =>
+			vscode.workspace.findFiles(
+				new vscode.RelativePattern(folder, STATE_FILE_RELATIVE_PATTERN),
+			).then(files => sets.push(...files))
+		);
+
+		await Promise.all(fillSetsArray);
+
+		if (!sets.length) {
+			return vscode.window.showErrorMessage(NOT_FOUND_ANY_SET_FILE);
+		}
+
+		const parent = getParentName(context);
+		const placeHolder = parent ? CURRENT_PARENT.replace('<FILE>', parent) : '';
+
+		vscode.window.showQuickPick(sets.map(set => set.path), { title: SELECT_PARENT_SET, placeHolder })
+			.then(set => {
+				if (!set) {
+					return;
+				}
+
+				saveParentSet(path.dirname(set), path.basename(set, STATE_EXTENSION), context);
+				vscode.window.showInformationMessage(SUCCESFULLY_SET_PARENT.replace('<FILE>', path.basename(set)));
+			});
 	});
 
 	context.subscriptions.push(createParentSet);
