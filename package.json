@@ -2,7 +2,7 @@
 	"name": "flutter-redux-gen",
 	"displayName": "Flutter Redux Gen (FRG)",
 	"description": "This is the VS Code Extension to generate Redux Code (State, Reducer, Middleware and Action).",
-	"version": "3.0.3",
+	"version": "3.0.5",
 	"publisher": "BalaDhruv",
 	"author": {
 		"name": "Balamurugan",
@@ -44,7 +44,8 @@
 		"onCommand:flutter-redux-gen.createMiddleware",
 		"onCommand:flutter-redux-gen.createAction",
 		"onCommand:flutter-redux-gen.createParentSet",
-		"onCommand:flutter-redux-gen.createVariableInState"
+		"onCommand:flutter-redux-gen.createVariableInState",
+		"onCommand:flutter-redux-gen.selectParentSet"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -82,6 +83,11 @@
 				"command": "flutter-redux-gen.createVariableInState",
 				"title": "Add Variable to State",
 				"category": "Flutter Redux Gen"
+			},
+			{
+				"command": "flutter-redux-gen.selectParentSet",
+				"title": "Select Parent Set",
+				"category": "Flutter Redux Gen"
 			}
 		],
 		"menus": {
@@ -112,6 +118,9 @@
 				{
 					"command": "flutter-redux-gen.createVariableInState",
 					"when": "false"
+				},
+				{
+					"command": "flutter-redux-gen.selectParentSet"
 				}
 			],
 			"editor/context": [{
@@ -138,11 +147,15 @@
 				},
 				{
 					"command": "flutter-redux-gen.createMiddleware",
-					"group": "flg@4"
+					"group": "flg@5"
 				},
 				{
 					"command": "flutter-redux-gen.createAction",
-					"group": "flg@4"
+					"group": "flg@6"
+				},
+				{
+					"command": "flutter-redux-gen.selectParentSet",
+					"group": "flg@7"
 				}
 			]
 		}

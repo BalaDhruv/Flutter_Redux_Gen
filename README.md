@@ -22,7 +22,8 @@ Refer the article to know about the extension.
 4.  Create Reducer
 5.  Create Middleware
 6.  Create Action
-7.  Add Variable to State
+7.  Select Parent Set (Select and Set Parent Set -> If you have moved your project extension will not remember parent set. you cen set parent set manually.)
+8.  Add Variable to State
 
 ## How to Use
 
@@ -49,6 +50,12 @@ Refer the article to know about the extension.
 | Set           | A folder containes Action, Middleware, Reducer and State files.    |
 | Parent Set    | Its a parent of all Set. Its configured by Us as a parent          |
 | Auto Import   | When you create a set it will automatically imported to Parent Set |
+
+## Command Palette
+
+| Command           | Description                       |
+| :---------------- | :-------------------------------- |
+| Select Parent Set | Select parent set from file tree. |
 
 ## Upcoming Features
 
