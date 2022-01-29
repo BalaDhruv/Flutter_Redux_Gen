@@ -156,11 +156,6 @@ export function activate(context: vscode.ExtensionContext): void {
 
 	// Create Redux Set Command Registering
 	let createReduxSet = vscode.commands.registerCommand('flutter-redux-gen.createReduxSet', async (args) => {
-		if (!isParentSetExist(context)) {
-			// Checking to see if the project moved or opened if another vscode editor 
-			// Try and find the parent Set
-			await checkAndSelectParentSetIfAlreadyExist(args, context);
-		}
 		let focusedFilePath = getFilePath(args.fsPath);
 		let nameField = vscode.window.createInputBox();
 		let nameFieldValidator = new RegExp(NAME_REG_EXP);
@@ -252,15 +247,11 @@ export function activate(context: vscode.ExtensionContext): void {
 		const parent = getParentName(context);
 		const placeHolder = parent ? CURRENT_PARENT.replace('<FILE>', parent) : '';
 
-		vscode.window.showQuickPick(sets.map(set => set.path), { title: SELECT_PARENT_SET, placeHolder })
-			.then(set => {
-				if (!set) {
-					return;
-				}
-
-				saveParentSet(path.dirname(set), path.basename(set, STATE_EXTENSION), context);
-				vscode.window.showInformationMessage(SUCCESFULLY_SET_PARENT.replace('<FILE>', path.basename(set)));
-			});
+		var set = await vscode.window.showQuickPick(sets.map(set => set.path), { title: SELECT_PARENT_SET, placeHolder });
+		if (set) {
+			saveParentSet(path.dirname(set), path.basename(set, STATE_EXTENSION), context);
+			vscode.window.showInformationMessage(SUCCESFULLY_SET_PARENT.replace('<FILE>', path.basename(set)));
+		}
 	});
 
 	context.subscriptions.push(createParentSet);

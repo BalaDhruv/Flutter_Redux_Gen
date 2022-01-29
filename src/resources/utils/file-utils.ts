@@ -50,12 +50,6 @@ async function _checkAndSelectParentSetIfAlreadyExist(args: any, context: vscode
     saveParentSet(dir, path.basename(selectedSet, STATE_EXTENSION), context);
 };
 
-// function _getFlutterVersion(context: vscode.ExtensionContext) {
-//     console.log("INSIDE FLUTTER VERSION");
-//     console.log(context.logPath);
-//     console.log(context.workspaceState.get("PARENT_PATH"));
-// }
-
 export var createFile = _createFile;
 export var createFolder = _createFolder;
 export var isParentSetExist = _isParentSetExist;

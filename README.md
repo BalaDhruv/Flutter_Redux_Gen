@@ -22,7 +22,8 @@ Refer the article to know about the extension.
 4.  Create Reducer
 5.  Create Middleware
 6.  Create Action
-7.  Add Variable to State
+7.  Select Parent Set (Select and Set Parent Set -> If you have moved your project extension will not remember parent set. you cen set parent set manually.)
+8.  Add Variable to State
 
 ## How to Use
 
@@ -52,9 +53,9 @@ Refer the article to know about the extension.
 
 ## Command Palette
 
-| Command           | Description                                                    |
-| :---------------- | :------------------------------------------------------------- |
-| Select Parent Set | Select parent set from file tree.                              |
+| Command           | Description                       |
+| :---------------- | :-------------------------------- |
+| Select Parent Set | Select parent set from file tree. |
 
 ## Upcoming Features
 
