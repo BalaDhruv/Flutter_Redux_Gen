@@ -50,6 +50,12 @@ Refer the article to know about the extension.
 | Parent Set    | Its a parent of all Set. Its configured by Us as a parent          |
 | Auto Import   | When you create a set it will automatically imported to Parent Set |
 
+## Command Palette
+
+| Command           | Description                                                    |
+| :---------------- | :------------------------------------------------------------- |
+| Select Parent Set | Select parent set from file tree.                              |
+
 ## Upcoming Features
 
 1.  Tree view of states - Explorer View
