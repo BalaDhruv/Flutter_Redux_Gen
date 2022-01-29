@@ -236,7 +236,7 @@ export function activate(context: vscode.ExtensionContext): void {
 			return vscode.window.showErrorMessage(NO_FOLDER_IN_WORKSPACE_FOUND);
 		}
 
-		let sets: vscode.Uri[] = [];
+		const sets: vscode.Uri[] = [];
 		const fillSetsArray = folders.map(folder =>
 			vscode.workspace.findFiles(
 				new vscode.RelativePattern(folder, STATE_FILE_RELATIVE_PATTERN),
