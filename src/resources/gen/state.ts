@@ -83,8 +83,15 @@ function _addVariableToState(path: string, varType: string, varName: string) {
 
 	// Add Var CopyWith Method
 	const copyWithText = `${varType}? ${varName},`;
-	const indexOfCopyWithLine = updatedStateCodeList.findIndex(value => value.includes(`${stateName} copyWith({`));
-	const indexOfInitialInsert = updatedStateCodeList[indexOfCopyWithLine].indexOf(`${stateName} copyWith({`) + `${stateName} copyWith({`.length;
+	let indexOfCopyWithLine = updatedStateCodeList.findIndex(value => value.includes(`${stateName} copyWith({`));
+	let indexOfInitialInsert: number;
+	if (indexOfCopyWithLine !== -1) {
+		indexOfInitialInsert = updatedStateCodeList[indexOfCopyWithLine].indexOf(`${stateName} copyWith({`) + `${stateName} copyWith({`.length;
+	} else {
+		indexOfCopyWithLine = updatedStateCodeList.findIndex(value => value.includes(`${stateName} copyWith(`)) + 1;
+		indexOfInitialInsert = updatedStateCodeList[indexOfCopyWithLine].indexOf(`{`) + 1;
+	}
+	
 	updatedStateCodeList[indexOfCopyWithLine] = updatedStateCodeList[indexOfCopyWithLine].slice(0, indexOfInitialInsert) + copyWithText + updatedStateCodeList[indexOfCopyWithLine].slice(indexOfInitialInsert);
 
 	// Add Var CopyWith Res Method
