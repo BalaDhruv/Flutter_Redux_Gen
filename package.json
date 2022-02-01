@@ -2,7 +2,7 @@
 	"name": "flutter-redux-gen",
 	"displayName": "Flutter Redux Gen (FRG)",
 	"description": "This is the VS Code Extension to generate Redux Code (State, Reducer, Middleware and Action).",
-	"version": "3.0.6",
+	"version": "3.0.7",
 	"publisher": "BalaDhruv",
 	"author": {
 		"name": "Balamurugan",
