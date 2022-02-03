@@ -2,6 +2,8 @@
 
 [![Discord Chat](https://img.shields.io/badge/chat-discord-blue.svg)](https://discord.gg/KYPkhEx)
 
+<a href="https://www.buymeacoffee.com/BalaDhruv" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+
 ## Introduction
 
 This is the VS Code Extension to generate Redux Code (State, Reducer, Middleware and Action).
