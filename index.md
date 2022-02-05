@@ -1,37 +1,90 @@
-## Welcome to GitHub Pages
+[![logo][]][author]
 
-You can use the [editor on GitHub](https://github.com/BalaDhruv/Flutter_Redux_Gen/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+[![Discord Chat](https://img.shields.io/badge/chat-discord-blue.svg)](https://discord.gg/KYPkhEx)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+<a href="https://www.buymeacoffee.com/BalaDhruv" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
-### Markdown
+## Introduction
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+This is the VS Code Extension to generate Redux Code (State, Reducer, Middleware and Action).
 
-```markdown
-Syntax highlighted code block
+I am Lazy Freelance Flutter Developer who doesn't wanna create redux files repeatedly. That's why I am building this extension to solve this problem.
 
-# Header 1
-## Header 2
-### Header 3
+## Article
 
-- Bulleted
-- List
+Refer the article to know about the extension.
 
-1. Numbered
-2. List
+[Generate Redux State, reducer, action, and Middleware via VS Code Extension - Medium](https://medium.com/@androbalamail/generate-redux-state-reducer-action-and-middleware-via-vs-code-extension-flutter-redux-gen-54e1defee2bd)
 
-**Bold** and _Italic_ and `Code` text
+## Features
 
-[Link](url) and ![Image](src)
-```
+1.  Create Parent Set
+2.  Create Set (folder with state, reducer, middleware and action files)
+3.  Create State
+4.  Create Reducer
+5.  Create Middleware
+6.  Create Action
+7.  Select Parent Set (Select and Set Parent Set -> If you have moved your project extension will not remember parent set. you cen set parent set manually.)
+8.  Add Variable to State
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## How to Use
 
-### Jekyll Themes
+|                  Create Parent Set                  |              Create Set               |
+| :-------------------------------------------------: | :-----------------------------------: |
+| [![create_parent_set_gif][]][create_parent_set_gif] | [![create_set_gif][]][create_set_gif] |
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/BalaDhruv/Flutter_Redux_Gen/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+|               Create State                |                   Create Reducer                    |
+| :---------------------------------------: | :-------------------------------------------------: |
+| [![create_state_gif][]][create_state_gif] | [![create_reducer_gif][]][generate_reducer_youtube] |
 
-### Support or Contact
+|                     Create Middleware                     |                   Create Action                   |
+| :-------------------------------------------------------: | :-----------------------------------------------: |
+| [![create_middleware_gif][]][generate_middleware_youtube] | [![create_action_gif][]][generate_action_youtube] |
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+|                 Add Variable to State                 |
+| :---------------------------------------------------: |
+| [![add_var_to_state_gif][]][add_var_to_state_youtube] |
+
+## Special Words Explanations ( Ex: Set, Auto Import)
+
+| Special Words | Description                                                        |
+| :------------ | :----------------------------------------------------------------- |
+| Set           | A folder containes Action, Middleware, Reducer and State files.    |
+| Parent Set    | Its a parent of all Set. Its configured by Us as a parent          |
+| Auto Import   | When you create a set it will automatically imported to Parent Set |
+
+## Command Palette
+
+| Command           | Description                       |
+| :---------------- | :-------------------------------- |
+| Select Parent Set | Select parent set from file tree. |
+
+## Upcoming Features
+
+1.  Tree view of states - Explorer View
+
+## Youtube PlayList
+
+[Flutter Redux Gen Youtube][flg_youtube_playlist]
+
+## Contact
+
+[Click here to add you comments and feedback][contact]
+
+[logo]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/flutter_redux_gen_logo_with_name.png
+[author]: https://balamurugan.dev/
+[contact]: https://forms.gle/wXPgEEAYvczjWwys8
+[create_parent_set_gif]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/create-parent-set.gif
+[create_set_gif]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/create-redux-set.gif
+[create_state_gif]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/create-state.gif
+[create_reducer_gif]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/create-reducer.gif
+[create_middleware_gif]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/create-middleware.gif
+[create_action_gif]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/create-action.gif
+[add_var_to_state_gif]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/add-var-to-state.gif
+[generate_state_youtube]: https://www.youtube.com/watch?v=vnqoh8owWfI
+[generate_reducer_youtube]: https://www.youtube.com/watch?v=JuCVdc-MWRM
+[generate_middleware_youtube]: https://www.youtube.com/watch?v=9-Ky7X2DW6Q
+[generate_action_youtube]: https://www.youtube.com/watch?v=F7Zk6VMqkFk
+[generate_set_youtube]: https://www.youtube.com/watch?v=aOMU4OHpoWw
+[add_var_to_state_youtube]: https://youtu.be/Pco-2Qq_XGA?list=PLAtrbE9cCxChjH_1A9mW3qlfBrzlfQk5W
+[flg_youtube_playlist]: https://www.youtube.com/watch?v=ISRztcuk2lg&list=PLAtrbE9cCxChjH_1A9mW3qlfBrzlfQk5W
