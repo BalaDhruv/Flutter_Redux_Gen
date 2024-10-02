@@ -62,6 +62,11 @@ Refer the article to know about the extension.
 ## Upcoming Features
 
 1.  Tree view of states - Explorer View
+2.  All States can be generated using freezed
+
+## Related Plugins
+1. [J2O - Json to Dart (freezed)](https://marketplace.visualstudio.com/items?itemName=BalaDhruv.j20)
+     This VS Code plugins helps you generate json to dart classes with freezed.
 
 ## Youtube PlayList
 
