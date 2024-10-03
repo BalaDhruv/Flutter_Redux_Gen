@@ -2,9 +2,22 @@ import { getFormattedReducerName, getFormattedStateName } from "../utils/utils";
 import * as fs from 'fs';
 import { REDUCER_EXTENSION, STATE_EXTENSION } from "../utils/constants";
 
-function _getParentSetStateCode(name: string) {
+function _getParentSetStateCode(name: string,haveFreezed:boolean) {
     const sName = getFormattedStateName(name);
-    return `
+    return haveFreezed ? `
+import 'package:freezed_annotation/freezed_annotation.dart';
+part '${name.toLocaleLowerCase()}.state.freezed.dart';
+part '${name.toLocaleLowerCase()}.state.g.dart';
+
+@freezed
+class ${sName}State with _$${sName}State {
+    const factory ${sName}State({
+    }) = _${sName}State;
+
+    factory ${sName}State.fromJson(Map<String, dynamic> json) => _$${sName}StateFromJson(json);
+}
+    ` :
+     `
 import 'package:flutter/material.dart';
 
 class ${sName}State {

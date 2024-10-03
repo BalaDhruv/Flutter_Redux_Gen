@@ -40,6 +40,7 @@ export function activate(context: vscode.ExtensionContext): void {
 		let focusedFilePath = getFilePath(args.fsPath);
 		let nameField = vscode.window.createInputBox();
 		let nameFieldValidator = new RegExp(NAME_REG_EXP);
+		let addFreezed: boolean;
 		if (isParentSetExist(context)) {
 			nameField.prompt = "🥳👍 Parent Set Found.";
 		} else {
@@ -49,13 +50,14 @@ export function activate(context: vscode.ExtensionContext): void {
 		nameField.onDidChangeValue((v) => {
 			nameField.validationMessage = nameFieldValidator.test(v) ? NAME_ERROR_MESSAGE : '';
 		});
-		nameField.onDidAccept(() => {
+		nameField.onDidAccept(async () => {
 			if (nameFieldValidator.test(nameField.value)) {
 				nameField.validationMessage = NAME_ERROR_MESSAGE;
 			} else {
 				nameField.hide();
+				addFreezed = (await vscode.window.showQuickPick(['Yes', 'No'], { placeHolder: 'do you have feezed class' }) === 'Yes');
 				var name = nameField.value ? nameField.value : DEFAULT_NAME;
-				createFile(focusedFilePath, name, STATE_EXTENSION, getStateGenCode, true);
+				createFile(focusedFilePath, name, STATE_EXTENSION, getStateGenCode, true, addFreezed);
 				nameField.validationMessage = '';
 			}
 		});
@@ -85,7 +87,7 @@ export function activate(context: vscode.ExtensionContext): void {
 			} else {
 				nameField.hide();
 				var name = nameField.value ? nameField.value : DEFAULT_NAME;
-				createFile(focusedFilePath, name, REDUCER_EXTENSION, getReducerGenCode, true);
+				createFile(focusedFilePath, name, REDUCER_EXTENSION, getReducerGenCode, true, false);
 				nameField.validationMessage = '';
 			}
 		});
@@ -115,7 +117,7 @@ export function activate(context: vscode.ExtensionContext): void {
 			} else {
 				nameField.hide();
 				var name = nameField.value ? nameField.value : DEFAULT_NAME;
-				createFile(focusedFilePath, name, MIDDLEWARE_EXTENSION, getMiddlewareGenCode, true);
+				createFile(focusedFilePath, name, MIDDLEWARE_EXTENSION, getMiddlewareGenCode, true, false);
 				nameField.validationMessage = '';
 			}
 		});
@@ -145,7 +147,7 @@ export function activate(context: vscode.ExtensionContext): void {
 			} else {
 				nameField.hide();
 				var name = nameField.value ? nameField.value : DEFAULT_NAME;
-				createFile(focusedFilePath, name, ACTION_EXTENSION, getActionGenCode, true);
+				createFile(focusedFilePath, name, ACTION_EXTENSION, getActionGenCode, true, false);
 				nameField.validationMessage = '';
 			}
 		});
@@ -160,6 +162,7 @@ export function activate(context: vscode.ExtensionContext): void {
 		let nameField = vscode.window.createInputBox();
 		let nameFieldValidator = new RegExp(NAME_REG_EXP);
 		nameField.placeholder = CREATE_ACTION_PLACE_HOLDER;
+		let addFreezed: boolean;
 		if (isParentSetExist(context)) {
 			nameField.prompt = "🥳👍 Parent Set Found.";
 		} else {
@@ -168,18 +171,19 @@ export function activate(context: vscode.ExtensionContext): void {
 		nameField.onDidChangeValue((v) => {
 			nameField.validationMessage = nameFieldValidator.test(v) ? NAME_ERROR_MESSAGE : '';
 		});
-		nameField.onDidAccept(() => {
+		nameField.onDidAccept(async () => {
 			if (nameFieldValidator.test(nameField.value)) {
 				nameField.validationMessage = NAME_ERROR_MESSAGE;
 			} else {
 				nameField.hide();
 				var name = nameField.value ? nameField.value : DEFAULT_NAME;
+				addFreezed = (await vscode.window.showQuickPick(['Yes', 'No'], { placeHolder: 'do you have feezed class' }) === 'Yes');
 				var isCreated = createFolder(focusedFilePath, name);
 				if (isCreated) {
-					createFile(focusedFilePath + "/" + name, name, ACTION_EXTENSION, getActionGenCode, false);
-					createFile(focusedFilePath + "/" + name, name, REDUCER_EXTENSION, getReducerGenCode, false);
-					createFile(focusedFilePath + "/" + name, name, MIDDLEWARE_EXTENSION, getMiddlewareGenCode, false);
-					createFile(focusedFilePath + "/" + name, name, STATE_EXTENSION, getStateGenCode, false);
+					createFile(focusedFilePath + "/" + name, name, ACTION_EXTENSION, getActionGenCode, false, false);
+					createFile(focusedFilePath + "/" + name, name, REDUCER_EXTENSION, getReducerGenCode, false, false);
+					createFile(focusedFilePath + "/" + name, name, MIDDLEWARE_EXTENSION, getMiddlewareGenCode, false, false);
+					createFile(focusedFilePath + "/" + name, name, STATE_EXTENSION, getStateGenCode, false, addFreezed);
 					addSetToParent(name, focusedFilePath, getParentName(context), getParentPath(context));
 					vscode.window.showInformationMessage(name + ' Set Created.');
 				}
@@ -200,21 +204,23 @@ export function activate(context: vscode.ExtensionContext): void {
 			let nameField = vscode.window.createInputBox();
 			let nameFieldValidator = new RegExp(NAME_REG_EXP);
 			nameField.placeholder = CREATE_ACTION_PLACE_HOLDER;
+			let addFreezed: boolean;
 			nameField.onDidChangeValue((v) => {
 				nameField.validationMessage = nameFieldValidator.test(v) ? NAME_ERROR_MESSAGE : '';
 			});
-			nameField.onDidAccept(() => {
+			nameField.onDidAccept(async () => {
 				if (nameFieldValidator.test(nameField.value)) {
 					nameField.validationMessage = NAME_ERROR_MESSAGE;
 				} else {
 					nameField.hide();
 					var name = nameField.value ? nameField.value : DEFAULT_NAME;
+					addFreezed = (await vscode.window.showQuickPick(['Yes', 'No'], { placeHolder: 'do you have feezed class' }) === 'Yes');
 
 					var isCreated = createFolder(focusedFilePath, 'store');
 					if (isCreated) {
-						createFile(path.join(focusedFilePath, 'store'), name, REDUCER_EXTENSION, getParentSetReducerCode, false);
-						createFile(path.join(focusedFilePath, 'store'), name, MIDDLEWARE_EXTENSION, getParentSetMiddlewareCode, false);
-						createFile(path.join(focusedFilePath, 'store'), name, STATE_EXTENSION, getParentSetStateCode, false);
+						createFile(path.join(focusedFilePath, 'store'), name, REDUCER_EXTENSION, getParentSetReducerCode, false, false);
+						createFile(path.join(focusedFilePath, 'store'), name, MIDDLEWARE_EXTENSION, getParentSetMiddlewareCode, false, false);
+						createFile(path.join(focusedFilePath, 'store'), name, STATE_EXTENSION, getParentSetStateCode, false, addFreezed);
 						saveParentSet(path.join(focusedFilePath, 'store'), name, context);
 						vscode.window.showInformationMessage(name + ' Parent Set Created.');
 					}

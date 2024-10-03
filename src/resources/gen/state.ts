@@ -2,9 +2,23 @@ import { getFormattedStateName } from "../utils/utils";
 import * as fs from 'fs';
 const _ = require('lodash');
 
-function _getStateGenCode(stateName: string) {
+function _getStateGenCode(stateName: string,haveFreezed:boolean) {
 	const sName = getFormattedStateName(stateName);
-	return `
+	return haveFreezed ? `
+import 'package:freezed_annotation/freezed_annotation.dart';
+part '${stateName.toLocaleLowerCase()}.state.freezed.dart';
+part '${stateName.toLocaleLowerCase()}.state.g.dart';
+
+@freezed
+class ${sName}State with _$${sName}State {
+    const factory ${sName}State({
+        bool? loading,
+        String? error,
+    }) = _${sName}State;
+
+    factory ${sName}State.fromJson(Map<String, dynamic> json) => _$${sName}StateFromJson(json);
+}
+	` : `
 class ${sName}State {
 	final bool loading;
 	final String error;

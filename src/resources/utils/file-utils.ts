@@ -4,9 +4,9 @@ import * as path from 'path';
 import { clearParentSet, saveParentSet } from './storage';
 import { SELECT_PARENT_SET, STATE_EXTENSION } from './constants';
 
-function _createFile(fPath: string, name: string, extention: string, getGenCode: Function, showInfo: boolean) {
+function _createFile(fPath: string, name: string, extention: string, getGenCode: Function, showInfo: boolean, haveFreezed: boolean) {
     const pathWithFileName = path.join(fPath, name.toLocaleLowerCase() + extention);
-    fs.writeFile(pathWithFileName, getGenCode(name), err => {
+    fs.writeFile(pathWithFileName, getGenCode(name,haveFreezed), err => {
         if (err) {
             vscode.window.showInformationMessage('Please check your path. Otherwise file a issue in Git Repo. Let me help.');
         } else if (showInfo) {
