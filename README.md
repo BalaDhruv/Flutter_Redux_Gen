@@ -26,6 +26,7 @@ Refer the article to know about the extension.
 6.  Create Action
 7.  Select Parent Set (Select and Set Parent Set -> If you have moved your project extension will not remember parent set. you cen set parent set manually.)
 8.  Add Variable to State
+9.  Add Variable to Freezed State
 
 ## How to Use
 
@@ -41,9 +42,9 @@ Refer the article to know about the extension.
 | :-------------------------------------------------------: | :-----------------------------------------------: |
 | [![create_middleware_gif][]][generate_middleware_youtube] | [![create_action_gif][]][generate_action_youtube] |
 
-|                 Add Variable to State                 |
-| :---------------------------------------------------: |
-| [![add_var_to_state_gif][]][add_var_to_state_youtube] |
+|                 Add Variable to State                 |             Add Variable to Freezed State             |
+| :---------------------------------------------------: | :---------------------------------------------------: |
+| [![add_var_to_state_gif][]][add_var_to_state_youtube] | [![add_var_to_freezed_gif][]][add_var_to_state_youtube] |
 
 ## Special Words Explanations ( Ex: Set, Auto Import)
 
@@ -86,6 +87,7 @@ Refer the article to know about the extension.
 [create_middleware_gif]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/create-middleware.gif
 [create_action_gif]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/create-action.gif
 [add_var_to_state_gif]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/add-var-to-state.gif
+[add_var_to_freezed_gif]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/add-var-to-freezed.gif
 [generate_state_youtube]: https://www.youtube.com/watch?v=vnqoh8owWfI
 [generate_reducer_youtube]: https://www.youtube.com/watch?v=JuCVdc-MWRM
 [generate_middleware_youtube]: https://www.youtube.com/watch?v=9-Ky7X2DW6Q

@@ -45,7 +45,6 @@
 		"onCommand:flutter-redux-gen.createAction",
 		"onCommand:flutter-redux-gen.createParentSet",
 		"onCommand:flutter-redux-gen.createVariableInState",
-		"onCommand:flutter-redux-gen.createVariableInFreezedClass",
 		"onCommand:flutter-redux-gen.selectParentSet"
 	],
 	"main": "./out/extension.js",
@@ -87,11 +86,6 @@
 				"category": "Flutter Redux Gen"
 			},
 			{
-				"command": "flutter-redux-gen.createVariableInFreezedClass",
-				"title": "Add Variable to Freezed Class",
-				"category": "Flutter Redux Gen"
-			},
-			{
 				"command": "flutter-redux-gen.selectParentSet",
 				"title": "Select Parent Set",
 				"category": "Flutter Redux Gen"
@@ -128,10 +122,6 @@
 					"when": "false"
 				},
 				{
-					"command": "flutter-redux-gen.createVariableInFreezedClass",
-					"when": "false"
-				},
-				{
 					"command": "flutter-redux-gen.selectParentSet"
 				}
 			],
@@ -139,11 +129,6 @@
 				{
 					"command": "flutter-redux-gen.createVariableInState",
 					"group": "flg",
-					"when": "resourceFilename =~ /.state.dart/"
-				},
-				{
-					"command": "flutter-redux-gen.createVariableInFreezedClass",
-					"group": "flg1",
 					"when": "resourceFilename =~ /.state.dart/"
 				}
 			],

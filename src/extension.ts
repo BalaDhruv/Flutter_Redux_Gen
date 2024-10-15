@@ -29,30 +29,43 @@ export function activate(context: vscode.ExtensionContext): void {
 		if (varName === undefined) {
 			return "No data";
 		}
-		addVariableToState(args.path, varType, varName);
+		const activeEditor = vscode.window.activeTextEditor;
+
+		if (activeEditor) {
+			const documentText = activeEditor.document.getText();
+	
+			if (documentText.includes('@freezed')) {
+				addVariableToFreezedClass(args.path, varType, varName);
+			} else {
+				addVariableToState(args.path, varType, varName);
+			}
+		} else {
+			vscode.window.showWarningMessage('No active text editor is open.');
+		}
+		
 	});
 
 	context.subscriptions.push(createVariableInState);
 
-	//add variable to freezed class
-	let createVariableInFreezedClass = vscode.commands.registerCommand('flutter-redux-gen.createVariableInFreezedClass', async (args) => {
-		let nameFieldValidator = new RegExp(NAME_REG_EXP);
-		var varType = await vscode.window.showQuickPick(["Number", "Int", "Double", "String", "Bool", "List", "Set", "Map", "Dynamic"],
-			{ title: "Select Variable Type", canPickMany: false });
-		if (varType === undefined) {
-			return "No data";
-		}
-		let varName = await vscode.window.showInputBox({
-			title: "Enter Variable Name",
-			validateInput: (val) => nameFieldValidator.test(val) ? NAME_ERROR_MESSAGE : '',
-		});
-		if (varName === undefined) {
-			return "No data";
-		}
-		addVariableToFreezedClass(args.path, varType, varName);
-	});
+	// //add variable to freezed class
+	// let createVariableInFreezedClass = vscode.commands.registerCommand('flutter-redux-gen.createVariableInFreezedClass', async (args) => {
+	// 	let nameFieldValidator = new RegExp(NAME_REG_EXP);
+	// 	var varType = await vscode.window.showQuickPick(["Number", "Int", "Double", "String", "Bool", "List", "Set", "Map", "Dynamic"],
+	// 		{ title: "Select Variable Type", canPickMany: false });
+	// 	if (varType === undefined) {
+	// 		return "No data";
+	// 	}
+	// 	let varName = await vscode.window.showInputBox({
+	// 		title: "Enter Variable Name",
+	// 		validateInput: (val) => nameFieldValidator.test(val) ? NAME_ERROR_MESSAGE : '',
+	// 	});
+	// 	if (varName === undefined) {
+	// 		return "No data";
+	// 	}
+	// 	addVariableToFreezedClass(args.path, varType, varName);
+	// });
 
-	context.subscriptions.push(createVariableInFreezedClass);
+	// context.subscriptions.push(createVariableInFreezedClass);
 	// Create State Command Registering
 	let createState = vscode.commands.registerCommand('flutter-redux-gen.createState', (args) => {
 
