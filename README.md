@@ -87,7 +87,7 @@ Refer the article to know about the extension.
 [create_middleware_gif]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/create-middleware.gif
 [create_action_gif]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/create-action.gif
 [add_var_to_state_gif]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/add-var-to-state.gif
-[add_var_to_freezed_gif]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/master/media/demo/add-var-to-freezed.gif
+[add_var_to_freezed_gif]: https://raw.githubusercontent.com/BalaDhruv/Flutter_Redux_Gen/refs/heads/freezed/media/demo/add-var-to-freezed.gif
 [generate_state_youtube]: https://www.youtube.com/watch?v=vnqoh8owWfI
 [generate_reducer_youtube]: https://www.youtube.com/watch?v=JuCVdc-MWRM
 [generate_middleware_youtube]: https://www.youtube.com/watch?v=9-Ky7X2DW6Q
